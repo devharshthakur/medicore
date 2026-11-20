@@ -5,3 +5,7 @@ catalog:
   vite-plus: 1.7.0
 overrides:
   vite@*: 'catalog:'
+update:
+  ignoreDeps:
+    - typescript
+    - '@types/node'
