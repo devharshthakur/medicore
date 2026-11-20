@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   imports: {
     scan: false,
   },
-  modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxt/icon', '@nuxt/fonts'],
+  modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxt/icon', '@nuxt/fonts', '@nuxt/image'],
   fonts: {
     families: [{ name: 'Inter Variable', provider: 'npm', global: true }],
   },
