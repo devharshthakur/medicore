@@ -7,6 +7,7 @@
     "dev": "nuxt dev --port 5173",
     "generate": "nuxt generate",
     "preview": "nuxt preview --port 4173",
+    "clean": "nuxt cleanup",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
