@@ -28,3 +28,6 @@ logs
 
 # Vite+ generated hook dispatcher
 .vite-hooks/_
+
+# Project Local Agent Skills
+/.agents
