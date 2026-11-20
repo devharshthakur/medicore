@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { VueQueryDevtools } from '@tanstack/vue-query-devtools';
+</script>
+
 <template>
   <UApp>
     <NuxtRouteAnnouncer />
@@ -7,5 +11,6 @@
       <UIcon name="i-simple-icons-github" class="size-6" />
       <span class="text-sm">Nuxt Icon is ready.</span>
     </div>
+    <VueQueryDevtools />
   </UApp>
 </template>

@@ -12,3 +12,9 @@ update:
   ignoreDeps:
     - typescript
     - '@types/node'
+minimumReleaseAgeExclude:
+  - '@tanstack/query-core@5.108.2'
+  - '@tanstack/query-devtools@5.108.2'
+  - '@tanstack/vue-query-devtools@6.4.5'
+  - '@tanstack/vue-query@5.108.2'
+  - solid-js@1.9.20
