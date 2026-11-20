@@ -24,4 +24,9 @@ export default defineNuxtConfig({
   ui: {
     eslint: true,
   },
+  vite: {
+    optimizeDeps: {
+      include: ['@tanstack/vue-query', '@tanstack/vue-query-devtools'],
+    },
+  },
 });
