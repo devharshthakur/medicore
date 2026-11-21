@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Project override: project config replaces the global server object, so fields repeat.
+  // vpx runs the package through pnpm; npx fails on this package's devEngines requirement.
+  "mcp": {
+    "servers": {
+      "chrome-devtools": {
+        "type": "local",
+        "command": ["vpx", "chrome-devtools-mcp@latest"],
+        "disabled": false,
+      },
+    },
+  },
+}
