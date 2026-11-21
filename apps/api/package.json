@@ -1,0 +1,27 @@
+{
+  "name": "@medcore/api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nitro build",
+    "dev": "tsx scripts/run.ts dev",
+    "preview": "tsx scripts/run.ts preview",
+    "start": "tsx scripts/run.ts start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --config prettier.config.js --ignore-path .prettierignore --write .",
+    "format:check": "prettier --config prettier.config.js --ignore-path .prettierignore --check ."
+  },
+  "dependencies": {
+    "nitro": "3.0.261103-rc",
+    "tsx": "4.23.15"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "eslint-config-prettier": "10.1.8",
+    "rolldown": "1.2.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.73.0"
+  }
+}

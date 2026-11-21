@@ -1,0 +1,10 @@
+node_modules
+.output
+.nitro
+.data
+.cache
+.turbo
+dist
+coverage
+pnpm-lock.yaml
+public
