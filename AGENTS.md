@@ -12,20 +12,20 @@ MedCore HMS is a pnpm workspace orchestrated with Turborepo. The root is the onl
 
 ## Commands
 
-Install once from the root with `pnpm install`; the workspace has one lockfile.
+Install once from the root with `vp install`; the workspace has one pnpm lockfile. Prefer `vp` commands and fall back to `pnpm` when `vp` is insufficient.
 
 Root scripts run through Turbo:
 
-- `pnpm dev` — both apps; web on `http://localhost:5173`, API on `http://localhost:8000`
-- `pnpm build`
-- `pnpm preview` — builds first; web on `http://localhost:4173`, API on `http://localhost:8000`
-- `pnpm lint` / `pnpm lint:fix`
-- `pnpm typecheck`
-- `pnpm format` / `pnpm format:check`
+- `vp run dev` — both apps; web on `http://localhost:5173`, API on `http://localhost:8000`
+- `vp run build`
+- `vp run preview` — builds first; web on `http://localhost:4173`, API on `http://localhost:8000`
+- `vp run lint` / `vp run lint:fix`
+- `vp run typecheck`
+- `vp run format` / `vp run format:check`
 
-Run a package command with `pnpm --filter @medcore/web <script>`, `pnpm --filter @medcore/api <script>`, or `pnpm --filter @medcore/shared <script>`.
+Run a package command with `vp run '@medcore/web#<script>'`, `vp run '@medcore/api#<script>'`, or `vp run '@medcore/shared#<script>'`.
 
-Drizzle lifecycle commands live in `@medcore/db`: `pnpm --filter @medcore/db db:generate`, `db:migrate`, `db:push`, `db:pull`, `db:studio`, `db:check`, and `db:up`. Local PostgreSQL is defined in `packages/db/compose.yaml`; create `packages/db/.env` from its example if missing, and set the same `DATABASE_URL` in `apps/api/.env` for the API.
+Drizzle lifecycle commands live in `@medcore/db`: `vp run '@medcore/db#db:generate'`, `db:migrate`, `db:push`, `db:pull`, `db:studio`, `db:check`, and `db:up` (use the same package-qualified form for each). Local PostgreSQL is defined in `packages/db/compose.yaml`; create `packages/db/.env` from its example if missing, and set the same `DATABASE_URL` in `apps/api/.env` for the API.
 
 Ports come from each app's ignored `.env`; copy the tracked `.env.example` to change defaults. `WEB_DEV_PORT` (5173) and `WEB_PREVIEW_PORT` (4173) cover web dev and preview; `API_PORT` (8000) covers API dev, preview, and the built-server `start` command. Process environment variables override file values.
 
@@ -44,7 +44,7 @@ This project is using Vite+, a unified toolchain built on top of Vite, Rolldown,
 
 Docs are local at `node_modules/vite-plus/docs` or online at https://viteplus.dev/guide/.
 
-This project does not use Vite+'s bundled Oxlint or Oxfmt. Linting and formatting are handled by ESLint and Prettier: use `pnpm lint`, `pnpm lint:fix`, `pnpm format`, and `pnpm format:check`. The `check` block in `vite.config.ts` disables the format and lint steps of `vp check`. Pre-commit hooks run `vp staged`, which applies ESLint and Prettier to staged files.
+This project does not use Vite+'s bundled Oxlint or Oxfmt. Linting and formatting are handled by ESLint and Prettier: use `vp run lint`, `vp run lint:fix`, `vp run format`, and `vp run format:check`. The `check` block in `vite.config.ts` disables the format and lint steps of `vp check`. Pre-commit hooks run `vp staged`, which applies ESLint and Prettier to staged files.
 
 ## Built-in Commands vs Scripts
 
@@ -64,7 +64,7 @@ release. Add a tool name to select part of the graph. For example, run
 ## Review Checklist
 
 - [ ] Run `vp install` after pulling remote changes and before getting started.
-- [ ] Run `pnpm lint` and `pnpm format:check` to lint and format-check changes.
+- [ ] Run `vp run lint` and `vp run format:check` to lint and format-check changes.
 - [ ] Run `vp test` to test changes.
 - [ ] Check if there are `vite.config.ts` tasks or `package.json` scripts necessary for validation, run via `vp run <script>`.
 - [ ] If setup, runtime, or package-manager behavior looks wrong, run `vp env doctor` and include its output when asking for help.
