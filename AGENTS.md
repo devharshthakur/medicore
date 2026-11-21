@@ -1,3 +1,38 @@
+# MedCore HMS
+
+MedCore HMS is a pnpm workspace orchestrated with Turborepo. The root is the only place to install dependencies and run shared tasks.
+
+## Layout
+
+- `apps/web/` — Nuxt 4 web app. It keeps Nuxt UI, Tailwind CSS, Nuxt Icon, Nuxt Fonts, Nuxt Image, and TanStack Vue Query.
+- `apps/api/` — standalone Nitro 3 API server. `server/api/hello.ts` is the scaffold sample.
+- `apps/shared/` — private TypeScript package for code shared by the apps. It has an empty `src/index.ts` entry point and local tooling, with no runtime dependency from the apps yet.
+- Root files — workspace policy, Turbo tasks, lint/format configuration, and Vite+ hook configuration.
+
+## Commands
+
+Install once from the root with `pnpm install`; the workspace has one lockfile.
+
+Root scripts run through Turbo:
+
+- `pnpm dev` — both apps; web on `http://localhost:5173`, API on `http://localhost:8000`
+- `pnpm build`
+- `pnpm preview` — builds first; web on `http://localhost:4173`, API on `http://localhost:8000`
+- `pnpm lint` / `pnpm lint:fix`
+- `pnpm typecheck`
+- `pnpm format` / `pnpm format:check`
+
+Run a package command with `pnpm --filter @medcore/web <script>`, `pnpm --filter @medcore/api <script>`, or `pnpm --filter @medcore/shared <script>`.
+
+Ports come from each app's ignored `.env`; copy the tracked `.env.example` to change defaults. `WEB_DEV_PORT` (5173) and `WEB_PREVIEW_PORT` (4173) cover web dev and preview; `API_PORT` (8000) covers API dev, preview, and the built-server `start` command. Process environment variables override file values.
+
+## Tooling
+
+- ESLint is installed at the root. Each package with lint rules has its own `eslint.config.mjs`.
+- Prettier is installed at the root. Each package has its own `prettier.config.js` and `.prettierignore` extending the root defaults; the root pair formats root files.
+- `.vite-hooks/pre-commit` runs `vp staged`. Staged checks in `vite.config.ts` route each package's files through its local Prettier config and ignore file; keep this hook configuration at the root.
+- The `dev`, `preview`, and `start` package commands run the TypeScript launchers in `apps/*/scripts/run.ts` with `tsx`, because they forward signals and long-running server ports. This is the only `tsx` exception to the `vpx` guidance below; use `vpx` for other scripts.
+
 <!--VITE PLUS START-->
 
 # Using Vite+, the Unified Toolchain for the Web
