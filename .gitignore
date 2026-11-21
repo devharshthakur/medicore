@@ -9,6 +9,9 @@ dist
 # Node dependencies
 node_modules
 
+# Turbo cache
+.turbo
+
 # Logs
 logs
 *.log

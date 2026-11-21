@@ -1,0 +1,42 @@
+{
+  "name": "@medcore/web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "tsx scripts/run.ts dev",
+    "generate": "nuxt generate",
+    "preview": "tsx scripts/run.ts preview",
+    "clean": "nuxt cleanup",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --config prettier.config.js --ignore-path .prettierignore --write .",
+    "format:check": "prettier --config prettier.config.js --ignore-path .prettierignore --check .",
+    "typecheck": "nuxt typecheck",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "5.3.0",
+    "@iconify-json/lucide": "1.2.157",
+    "@iconify-json/simple-icons": "1.2.103",
+    "@nuxt/fonts": "1.2.0",
+    "@nuxt/icon": "2.6.3",
+    "@nuxt/image": "2.2.1",
+    "@nuxt/ui": "4.13.0",
+    "@tanstack/vue-query": "5.108.1",
+    "@tanstack/vue-query-devtools": "6.4.4",
+    "nuxt": "4.6.4",
+    "tailwindcss": "4.3.5",
+    "vue": "3.5.45",
+    "vue-router": "5.5.1"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "1.17.0",
+    "@types/node": "26.6.6",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-better-tailwindcss": "4.11.0",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "vue-tsc": "3.3.14"
+  }
+}
