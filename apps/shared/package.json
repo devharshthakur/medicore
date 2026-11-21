@@ -1,0 +1,18 @@
+{
+  "name": "@medcore/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --config prettier.config.js --ignore-path .prettierignore --write .",
+    "format:check": "prettier --config prettier.config.js --ignore-path .prettierignore --check .",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "10.1.8",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.73.0"
+  }
+}
