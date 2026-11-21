@@ -7,6 +7,7 @@ MedCore HMS is a pnpm workspace orchestrated with Turborepo. The root is the onl
 - `apps/web/` — Nuxt 4 web app. It keeps Nuxt UI, Tailwind CSS, Nuxt Icon, Nuxt Fonts, Nuxt Image, and TanStack Vue Query.
 - `apps/api/` — standalone Nitro 3 API server. `server/api/hello.ts` is the scaffold sample.
 - `apps/shared/` — private TypeScript package for code shared by the apps. It has an empty `src/index.ts` entry point and local tooling, with no runtime dependency from the apps yet.
+- `packages/db/` — private `@medcore/db` package with the Drizzle ORM PostgreSQL schema, relations, client, migrations, and a `compose.yaml` for local PostgreSQL.
 - Root files — workspace policy, Turbo tasks, lint/format configuration, and Vite+ hook configuration.
 
 ## Commands
@@ -23,6 +24,8 @@ Root scripts run through Turbo:
 - `pnpm format` / `pnpm format:check`
 
 Run a package command with `pnpm --filter @medcore/web <script>`, `pnpm --filter @medcore/api <script>`, or `pnpm --filter @medcore/shared <script>`.
+
+Drizzle lifecycle commands live in `@medcore/db`: `pnpm --filter @medcore/db db:generate`, `db:migrate`, `db:push`, `db:pull`, `db:studio`, `db:check`, and `db:up`. Local PostgreSQL is defined in `packages/db/compose.yaml`; create `packages/db/.env` from its example if missing, and set the same `DATABASE_URL` in `apps/api/.env` for the API.
 
 Ports come from each app's ignored `.env`; copy the tracked `.env.example` to change defaults. `WEB_DEV_PORT` (5173) and `WEB_PREVIEW_PORT` (4173) cover web dev and preview; `API_PORT` (8000) covers API dev, preview, and the built-server `start` command. Process environment variables override file values.
 
