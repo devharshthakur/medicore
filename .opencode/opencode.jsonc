@@ -9,6 +9,12 @@
         "command": ["vpx", "chrome-devtools-mcp@latest"],
         "disabled": false,
       },
+      "drizzle": {
+        "type": "local",
+        "command": ["pnpm", "exec", "drizzle-kit", "mcp"],
+        "cwd": "/Volumes/samsung/dev/internmo/saas/packages/db",
+        "disabled": false,
+      },
     },
   },
 }
