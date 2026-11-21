@@ -14,6 +14,7 @@
     "prepare": "vp hooks enable"
   },
   "devDependencies": {
+    "@opencode/plugin": "2.3.2",
     "eslint": "10.15.0",
     "eslint-config-prettier": "10.1.8",
     "prettier": "3.10.1",
