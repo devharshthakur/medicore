@@ -1,7 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  // Project override: project config replaces the global server object, so fields repeat.
-  // vpx runs the package through pnpm; npx fails on this package's devEngines requirement.
   "mcp": {
     "servers": {
       "chrome-devtools": {
@@ -11,8 +9,8 @@
       },
       "drizzle": {
         "type": "local",
-        "command": ["pnpm", "exec", "drizzle-kit", "mcp"],
-        "cwd": "/Volumes/samsung/dev/internmo/saas/packages/db",
+        "command": ["vpx", "drizzle-kit", "mcp"],
+        "cwd": "/Volumes/samsung/dev/internmo/medicore/packages/db",
         "disabled": false,
       },
     },
