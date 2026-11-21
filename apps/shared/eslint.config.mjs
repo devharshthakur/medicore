@@ -5,6 +5,13 @@ export default tseslint.config(
   {
     ignores: ['.output/**', '.nitro/**', '.cache/**', '.turbo/**', 'dist/**', 'coverage/**'],
   },
+  {
+    languageOptions: {
+      parserOptions: {
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
   ...tseslint.configs.recommended,
   eslintConfigPrettier,
 );
