@@ -1,6 +1,13 @@
 {
   "version": 2,
   "skills": {
+    "add": {
+      "source": "vercel/turborepo",
+      "commit": "b911d19d45f60c96cb33c756b6e238ad4d32bb73",
+      "sourceType": "github",
+      "skillPath": "skills/add/SKILL.md",
+      "computedHash": "ef75a72c0728dce1139062476492c7e916c0778e78a93ccb65c0195e22dfb534"
+    },
     "create-adaptable-composable": {
       "source": "vuejs-ai/skills",
       "commit": "198f0cd8f7f9c0a3d9b566ccc16de6677519ee78",
@@ -28,6 +35,13 @@
       "sourceType": "github",
       "skillPath": "skills/pnpm/SKILL.md",
       "computedHash": "fb4c2b0f98b1e651fb217f2070e3782f2fa58fd7d9fb2745e9fefaf945b8c60e"
+    },
+    "turborepo": {
+      "source": "vercel/turborepo",
+      "commit": "b911d19d45f60c96cb33c756b6e238ad4d32bb73",
+      "sourceType": "github",
+      "skillPath": "skills/turborepo/SKILL.md",
+      "computedHash": "49bb6427015253ce5d93f15dfa6c9ade3f8528f0fbe54769b6da1e1458f058d4"
     },
     "vite": {
       "source": "antfu/skills",
