@@ -2,6 +2,11 @@
   "name": "@medcore/api",
   "private": true,
   "type": "module",
+  "imports": {
+    "#/*": "./*",
+    "#server/*": "./server/*",
+    "#utils/*": "./server/utils/*"
+  },
   "scripts": {
     "build": "nitro build",
     "dev": "tsx scripts/run.ts dev",
@@ -14,7 +19,9 @@
     "format:check": "prettier --config prettier.config.js --ignore-path .prettierignore --check ."
   },
   "dependencies": {
+    "@better-auth/drizzle-adapter": "1.7.27",
     "@medcore/db": "workspace:*",
+    "better-auth": "1.7.27",
     "drizzle-orm": "1.0.0-rc.5",
     "nitro": "3.0.261103-rc",
     "tsx": "4.23.15"
