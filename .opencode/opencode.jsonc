@@ -13,6 +13,11 @@
         "cwd": "/Volumes/samsung/dev/internmo/medicore/packages/db",
         "disabled": false,
       },
+      "better-auth": {
+        "type": "remote",
+        "url": "https://mcp.better-auth.com/mcp",
+        "disabled": false,
+      },
     },
   },
 }
