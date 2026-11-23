@@ -24,7 +24,7 @@ Before any task that writes code or uses a third-party library, fetch current do
 
 - Use Nuxt UI components for interface controls and other UI elements whenever available. Load the `nuxt-ui` skill and fetch current docs first as required above. Do not introduce another UI component library by default.
 - Semantic HTML, Vue components, and Tailwind are permitted for layout, composition, and needs Nuxt UI does not cover. Preserve accessibility.
-- For design examples, load the `sitemaps` skill and select the relevant official Nuxt UI template reference. Treat examples as inspiration, not project requirements, and check licensing before copying.
+- For design examples, read `references/nuxt-ui-templates/index.md` and select the relevant official Nuxt UI template reference. Treat examples as inspiration, not project requirements, and check licensing before copying.
 
 ### Libraries
 
