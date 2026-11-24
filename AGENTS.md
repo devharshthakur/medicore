@@ -8,6 +8,7 @@ MedCore HMS is a pnpm workspace orchestrated with Turborepo. The root is the onl
 - `apps/api/` — standalone Nitro 3 API server. `server/api/hello.ts` is the scaffold sample.
 - `apps/shared/` — private TypeScript package for code shared by the apps. It has an empty `src/index.ts` entry point and local tooling, with no runtime dependency from the apps yet.
 - `packages/db/` — private `@medcore/db` package with the Drizzle ORM PostgreSQL schema, relations, client, migrations, and a `compose.yaml` for local PostgreSQL.
+- `scripts/` — root Node tooling that is not a workspace package. `scripts/env/` validates the environment (`schema.ts` rules, `index.ts` CLI); `scripts/tsconfig.json` covers this directory.
 - Root files — workspace policy, Turbo tasks, lint/format configuration, and Vite+ hook configuration.
 
 ## Product requirements
@@ -23,8 +24,9 @@ Root scripts run through Turbo:
 - `vp run dev` — both apps; web on `http://localhost:5173`, API on `http://localhost:8000`
 - `vp run build`
 - `vp run preview` — builds first; web on `http://localhost:4173`, API on `http://localhost:8000`
+- `vp run docker:up` — builds and starts the Docker stack (`docs/docker.md`)
 - `vp run lint` / `vp run lint:fix`
-- `vp run typecheck`
+- `vp run typecheck` — Turbo packages only; run `vp run typecheck:scripts` for `scripts/`
 - `vp run format` / `vp run format:check`
 
 Run a package command with `vp run '@medcore/web#<script>'`, `vp run '@medcore/api#<script>'`, or `vp run '@medcore/shared#<script>'`.

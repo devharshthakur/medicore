@@ -16,7 +16,7 @@ MedCore HMS is a multi-tenant hospital management platform for clinical and admi
 | Authentication | Better Auth                        |
 | Tooling        | TypeScript, Vite+, Turborepo, pnpm |
 
-For local setup, see the [setup guide](docs/setup.md).
+For local setup, see the [setup guide](docs/setup.md). For self-hosting, see the [Docker guide](docs/docker.md).
 
 ## License
 
