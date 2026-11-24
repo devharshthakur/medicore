@@ -13,8 +13,8 @@ reverse proxy, a domain, and additional operational and security controls.
 ## Prerequisites
 
 - Docker Engine, Docker Compose, and the Docker Buildx plugin, with Docker running.
-  Check Buildx with `docker buildx version`. Buildx is required so the
-  Dockerfile-specific ignore file excludes local secrets from the build context.
+  Check Buildx with `docker buildx version`. The root `.dockerignore` keeps `.env`,
+  `node_modules`, and build output out of the build context.
 - Vite+ to run the root package script. You can also use Docker Compose directly
   without Vite+.
 - `openssl` to generate secrets.
@@ -36,6 +36,9 @@ Docker env file.
 
 2. Set these values in `.env` before the first start:
 
+   - `POSTGRES_USER`, `POSTGRES_DB`: the user and database the stack creates. The
+     defaults are `medcore`. They are also part of the container `DATABASE_URL`, so
+     change them before the first start, or not at all.
    - `POSTGRES_PASSWORD`: run `openssl rand -hex 32`. Use hexadecimal output, because
      the value is embedded in a database URL.
    - `BETTER_AUTH_SECRET`: run `openssl rand -hex 32` again. Use a different value.
@@ -43,9 +46,9 @@ Docker env file.
      setup. If you change the port, update both so `BETTER_AUTH_URL` matches the
      browser address. It controls authentication origins and callbacks.
 
-   `vp run docker:up` validates these first: it refuses to start if
-   `POSTGRES_PASSWORD` is under 16 characters, `BETTER_AUTH_SECRET` is under 32, or a
-   URL or port is malformed.
+   `vp run docker:up` validates these first: it refuses to start when
+   `POSTGRES_USER` or `POSTGRES_DB` is empty, `POSTGRES_PASSWORD` is under 16
+   characters, `BETTER_AUTH_SECRET` is under 32, or a URL or port is malformed.
 
 3. Keep `.env` private and back it up securely. Do not commit it.
 
@@ -56,9 +59,9 @@ affects the local development database: that database keeps the password it was
 created with, so update `DATABASE_URL` to match, or keep local development on a
 separate copy of the repository.
 
-PostgreSQL uses `POSTGRES_PASSWORD` only when its data volume is first created.
-Changing the value later does not change the existing database password. Do not
-delete the volume to resolve a password mismatch: it contains your data.
+PostgreSQL uses `POSTGRES_USER`, `POSTGRES_DB` and `POSTGRES_PASSWORD` only when
+its data volume is first created. Changing them later does not change the existing
+database. Do not delete the volume to resolve a mismatch: it contains your data.
 
 ## Start and stop
 
@@ -105,7 +108,7 @@ To create a logical PostgreSQL backup while the stack is running:
 
 ```sh
 docker compose -f compose.yaml exec -T postgres \
-  pg_dump -U medcore -d medcore -Fc > medcore-backup.dump
+  sh -c 'pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Fc' > medcore-backup.dump
 ```
 
 The backup contains sensitive data. Encrypt it, restrict access, and store a copy

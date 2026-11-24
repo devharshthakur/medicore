@@ -24,6 +24,10 @@ const postgresUrl = z.url({ protocol: /^postgres(ql)?$/, error: 'must be a postg
 // Signing secrets must be long enough to resist guessing.
 const secret = z.string().min(32, 'must be at least 32 characters (generate one with `openssl rand -base64 32`)');
 
+// A database password that is long enough for the Docker stack. Local development
+// shares the same value, so it must satisfy this everywhere.
+const databasePassword = z.string().min(16, 'must be at least 16 characters (generate one with `openssl rand -hex 32`)');
+
 // --- Groups -----------------------------------------------------------------
 
 export const groups = {
@@ -50,13 +54,15 @@ export const groups = {
     POSTGRES_PORT: port,
   },
 
-  // The Docker Compose stack. Stricter than development: a weak database password
-  // is rejected so the dev default cannot reach the stack.
+  // The Docker Compose stack. A weak database password is rejected, so the value
+  // must be strong in local development too.
   docker: {
     WEB_PORT: port,
     BETTER_AUTH_URL: httpUrl,
     BETTER_AUTH_SECRET: secret,
-    POSTGRES_PASSWORD: z.string().min(16, 'must be at least 16 characters (generate one with `openssl rand -hex 32`)'),
+    POSTGRES_USER: z.string().min(1, 'must not be empty'),
+    POSTGRES_DB: z.string().min(1, 'must not be empty'),
+    POSTGRES_PASSWORD: databasePassword,
   },
 } satisfies Record<string, z.ZodRawShape>;
 
