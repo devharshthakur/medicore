@@ -1,6 +1,6 @@
 ---
 name: Project Defaults
-description: Apply MedCore project defaults per task type: required Vue, Nuxt, and Nuxt UI skills, latest library documentation, package commands, and documentation updates.
+description: Apply MedCore project defaults per task type: required Vue, Nuxt, and Nuxt UI skills, latest library documentation, and documentation updates.
 ---
 
 # Project defaults
@@ -36,7 +36,6 @@ Before any task that writes code or uses a third-party library, fetch current do
 - Before using or adding a third-party library, fetch current documentation first as required above.
 - Do not rely on remembered APIs or unreviewed snippets.
 
-### Documentation and commands
+### Documentation
 
-- Prefer `vp` for package management and tooling. Use `vp run <script>` for project scripts rather than similarly named built-in commands. Use `pnpm` when `vp` is insufficient, including project-specific exceptions.
 - Do not edit project documentation as incidental work. Documentation changes are allowed for `/update:docs` or an explicit documentation-only request, subject to the normal approval and permission gates. Report documentation that needs a separate update.

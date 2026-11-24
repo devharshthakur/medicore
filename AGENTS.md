@@ -16,7 +16,7 @@ The product requirements (what to build) live in the `prd` skill (`.opencode/ski
 
 ## Commands
 
-Install once from the root with `vp install`; the workspace has one pnpm lockfile. Prefer `vp` commands and fall back to `pnpm` when `vp` is insufficient.
+Install once from the root with `vp install`; the workspace has one pnpm lockfile. Prefer `vp` for package management and tooling, and fall back to `pnpm` when `vp` is insufficient (including project-specific exceptions). Use `vp run <script>` for project scripts, not the similarly named `vp` built-ins.
 
 Root scripts run through Turbo:
 
