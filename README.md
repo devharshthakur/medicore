@@ -1,6 +1,7 @@
 # MedCore HMS
 
-## About
+> [!IMPORTANT]
+> Under active development. The project is currently a scaffold; product features are not yet complete.
 
 MedCore HMS is a multi-tenant hospital management platform for clinical and administrative workflows.
 
@@ -15,12 +16,8 @@ MedCore HMS is a multi-tenant hospital management platform for clinical and admi
 | Authentication | Better Auth                        |
 | Tooling        | TypeScript, Vite+, Turborepo, pnpm |
 
-## Development status
-
-Under active development. The project is currently a scaffold; product features are not yet complete.
-
-See the [setup guide](docs/setup.md) to run it locally.
+For local setup, see the [setup guide](docs/setup.md).
 
 ## License
 
-[MIT](LICENSE)
+Released under the [MIT License](LICENSE).
