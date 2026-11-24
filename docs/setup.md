@@ -1,5 +1,7 @@
 # Local setup
 
+For the self-hosted production-mode Docker stack, see [Docker setup](docker.md).
+
 ## Prerequisites
 
 - Node.js and pnpm versions listed in the root `package.json` (`devEngines`).
@@ -11,24 +13,22 @@ Run commands from the repository root.
 
 ```bash
 vp install
-cp -n packages/db/.env.example packages/db/.env
-cp -n apps/api/.env.example apps/api/.env
-cp -n apps/web/.env.example apps/web/.env
+cp -n .env.example .env
 ```
 
-Set `BETTER_AUTH_SECRET` in `apps/api/.env` to a value generated with `openssl rand -base64 32`. Keep `DATABASE_URL` in `apps/api/.env` and `packages/db/.env` identical and consistent with the PostgreSQL settings in `packages/db/.env`. The example credentials are for local development only.
+All settings live in the root `.env`. Set `BETTER_AUTH_SECRET` to a value generated with `openssl rand -base64 32`. The example database credentials are for local development only. `DATABASE_URL` must match the `POSTGRES_*` values in the same file.
 
 ## Start
 
 ```bash
-docker compose -f packages/db/compose.yaml up -d
-vp run '@medcore/db#db:migrate'
+docker compose --env-file .env -f packages/db/compose.yaml up -d
+vp run db:migrate
 vp run dev
 ```
 
 Open the web app at http://localhost:5173. The API runs at http://localhost:8000.
 
-Ports and the API proxy target can be changed in the app `.env` files. Process environment variables take precedence.
+Change ports and the API proxy target (`NUXT_API_ORIGIN`) in the root `.env`. Process environment variables take precedence.
 
 ## Checks
 

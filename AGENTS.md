@@ -29,9 +29,11 @@ Root scripts run through Turbo:
 
 Run a package command with `vp run '@medcore/web#<script>'`, `vp run '@medcore/api#<script>'`, or `vp run '@medcore/shared#<script>'`.
 
-Drizzle lifecycle commands live in `@medcore/db`: `vp run '@medcore/db#db:generate'`, `db:migrate`, `db:push`, `db:pull`, `db:studio`, `db:check`, and `db:up` (use the same package-qualified form for each). Local PostgreSQL is defined in `packages/db/compose.yaml`; create `packages/db/.env` from its example if missing, and set the same `DATABASE_URL` in `apps/api/.env` for the API.
+Environment variables are validated in one place: `scripts/env/` (zod rules in `schema.ts`, entry `index.ts`; groups `web`, `api`, `db`, `docker`). The root `dev`, `build`, `preview`, `docker:up`, and `db:*` scripts run it first and stop with a pretty-printed error if a value is invalid. Apps and packages do not validate env themselves; package-qualified commands such as `vp run '@medcore/web#dev'` skip the check. Add or change a variable in `scripts/env/schema.ts` and `.env.example` together.
 
-Ports come from each app's ignored `.env`; copy the tracked `.env.example` to change defaults. `WEB_DEV_PORT` (5173) and `WEB_PREVIEW_PORT` (4173) cover web dev and preview; `API_PORT` (8000) covers API dev, preview, and the built-server `start` command. Process environment variables override file values.
+Drizzle lifecycle commands are root scripts that validate the env, then call `@medcore/db`: `vp run db:generate`, `db:migrate`, `db:push`, `db:pull`, `db:studio`, `db:check`, and `db:up`. Local PostgreSQL is defined in `packages/db/compose.yaml`. Run it with `docker compose --env-file .env -f packages/db/compose.yaml up -d`.
+
+All environment variables live in one ignored root `.env`; copy the tracked `.env.example` to create it. Ports and other variables come from that file. `WEB_DEV_PORT` (5173) and `WEB_PREVIEW_PORT` (4173) cover web dev and preview; `API_PORT` (8000) covers API dev, preview, and the built-server `start` command. Process environment variables override file values.
 
 ## Tooling
 
