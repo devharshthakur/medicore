@@ -1,6 +1,6 @@
 # @medcore/api
 
-Nitro v3 API server for MedCore HMS, built on H3 v2.
+Nitro v3 API server for MedCore HMS, built on H3 v2. Authentication uses Better Auth; database access uses the shared `@medcore/db` client.
 
 ## Scripts
 
@@ -8,9 +8,9 @@ Run from the repository root with `vp run '@medcore/api#<script>'`.
 
 | Script      | Description                                       |
 | ----------- | ------------------------------------------------- |
-| `dev`       | Start the dev server on `http://localhost:8000`   |
+| `dev`       | Dev server on `http://localhost:8000`             |
 | `build`     | Bundle the server into `.output/`                 |
-| `preview`   | Build and run the server locally                  |
+| `preview`   | Build, then run the server locally                |
 | `start`     | Run the built server (`.output/server/index.mjs`) |
 | `lint`      | Lint with ESLint (`lint:fix` to apply fixes)      |
 | `typecheck` | Type-check with `tsc`                             |
@@ -24,14 +24,49 @@ Run from the repository root with `vp run '@medcore/api#<script>'`.
 | `GET /api/db/health` | Database health check |
 | `/api/auth/**`       | Better Auth handler   |
 
-Routes live in `server/api/`. File paths map to URLs, for example `server/api/users/[id].get.ts` serves `GET /api/users/:id`.
+Routes live in `server/api/`. A file path maps to a URL: `server/api/users/[id].get.ts` serves `GET /api/users/:id`.
 
-Test a route against the sources, without a build:
+Send a request to the sources without a build:
 
-```bash
+```sh
 npx nitro fetch /api/hello
 ```
 
+Imports are explicit: `defineHandler` and `HTTPError` come from `nitro`, and H3 helpers such as `getQuery` come from `nitro/h3`.
+
 ## Configuration
 
-Set `API_PORT` (default `8000`) and the other variables in the root `.env`. See the [setup guide](../../docs/setup.md).
+Set these in the root `.env`. See the [setup guide](../../docs/setup.md).
+
+| Variable             | Purpose                       |
+| -------------------- | ----------------------------- |
+| `API_PORT`           | Server port. Default `8000`.  |
+| `BETTER_AUTH_URL`    | Public origin of the web app. |
+| `BETTER_AUTH_SECRET` | Better Auth signing secret.   |
+| `DATABASE_URL`       | PostgreSQL connection string. |
+
+## Project structure
+
+```text
+apps/api/
+├── public/
+│   └── index.html
+├── scripts/
+│   └── run.ts
+├── server/
+│   ├── api/
+│   │   ├── auth/
+│   │   │   └── [...all].ts
+│   │   ├── db/
+│   │   │   └── health.ts
+│   │   └── hello.ts
+│   └── utils/
+│       └── auth.ts
+├── AGENTS.md
+├── eslint.config.mjs
+├── nitro.config.ts
+├── package.json
+├── prettier.config.js
+├── README.md
+└── tsconfig.json
+```
