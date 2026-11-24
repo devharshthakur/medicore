@@ -16,13 +16,8 @@ export function createDatabaseClient(connectionString: string) {
   return { client, db };
 }
 
-const connectionString = process.env.DATABASE_URL;
-
-if (!connectionString) {
-  throw new Error('DATABASE_URL is not set. Copy .env.example to .env before using @medcore/db.');
-}
-
-export const { client, db } = createDatabaseClient(connectionString);
+// DATABASE_URL is validated once by the root scripts/env/ before any command starts.
+export const { client, db } = createDatabaseClient(process.env.DATABASE_URL as string);
 
 export { schema };
 export * from './relations';

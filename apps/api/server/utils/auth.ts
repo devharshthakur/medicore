@@ -3,7 +3,8 @@ import { db, schema } from '@medcore/db';
 import { betterAuth } from 'better-auth';
 import { admin } from 'better-auth/plugins/admin';
 
-const webOrigin = process.env.BETTER_AUTH_URL ?? 'http://localhost:5173';
+// BETTER_AUTH_URL is validated once by the root scripts/env/ before the server starts.
+const webOrigin = process.env.BETTER_AUTH_URL as string;
 
 export const auth = betterAuth({
   baseURL: webOrigin,

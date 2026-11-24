@@ -3,24 +3,34 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "preview": "turbo run preview",
+    "build": "vpx scripts/env/index.ts api web && turbo run build",
+    "dev": "vpx scripts/env/index.ts api web && turbo run dev",
+    "preview": "vpx scripts/env/index.ts api web && turbo run preview",
+    "docker:up": "vpx scripts/env/index.ts docker && docker buildx version >/dev/null && DOCKER_BUILDKIT=1 docker compose -f compose.yaml up --build -d",
+    "db:generate": "vpx scripts/env/index.ts db && vp run '@medcore/db#db:generate'",
+    "db:migrate": "vpx scripts/env/index.ts db && vp run '@medcore/db#db:migrate'",
+    "db:push": "vpx scripts/env/index.ts db && vp run '@medcore/db#db:push'",
+    "db:pull": "vpx scripts/env/index.ts db && vp run '@medcore/db#db:pull'",
+    "db:studio": "vpx scripts/env/index.ts db && vp run '@medcore/db#db:studio'",
+    "db:check": "vpx scripts/env/index.ts db && vp run '@medcore/db#db:check'",
+    "db:up": "vpx scripts/env/index.ts db && vp run '@medcore/db#db:up'",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "typecheck": "turbo run typecheck",
-    "format": "turbo run format && prettier --config prettier.config.js --ignore-path .prettierignore --write package.json pnpm-workspace.yaml turbo.json vite.config.ts prettier.config.js README.md AGENTS.md .vscode/*.json",
-    "format:check": "turbo run format:check && prettier --config prettier.config.js --ignore-path .prettierignore --check package.json pnpm-workspace.yaml turbo.json vite.config.ts prettier.config.js README.md AGENTS.md .vscode/*.json",
+    "format": "turbo run format && prettier --config prettier.config.js --ignore-path .prettierignore --write package.json pnpm-workspace.yaml turbo.json vite.config.ts prettier.config.js scripts/env/*.ts README.md AGENTS.md .vscode/*.json",
+    "format:check": "turbo run format:check && prettier --config prettier.config.js --ignore-path .prettierignore --check package.json pnpm-workspace.yaml turbo.json vite.config.ts prettier.config.js scripts/env/*.ts README.md AGENTS.md .vscode/*.json",
     "prepare": "vp hooks enable"
   },
   "devDependencies": {
     "@opencode/plugin": "2.4.1",
+    "@types/node": "26.6.6",
     "eslint": "10.15.0",
     "eslint-config-prettier": "10.1.8",
     "prettier": "3.10.1",
     "turbo": "2.11.13",
     "typescript": "6.0.3",
-    "vite-plus": "1.7.0"
+    "vite-plus": "1.7.0",
+    "zod": "4.6.7"
   },
   "devEngines": {
     "packageManager": {
