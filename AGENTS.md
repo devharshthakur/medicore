@@ -10,6 +10,10 @@ MedCore HMS is a pnpm workspace orchestrated with Turborepo. The root is the onl
 - `packages/db/` — private `@medcore/db` package with the Drizzle ORM PostgreSQL schema, relations, client, migrations, and a `compose.yaml` for local PostgreSQL.
 - Root files — workspace policy, Turbo tasks, lint/format configuration, and Vite+ hook configuration.
 
+## Product requirements
+
+The product requirements (what to build) live in the `prd` skill (`.opencode/skills/prd/references/`). Load the `prd` skill, then read only the files for the task. The PRD does not set the stack; this file and the package manifests do. Do not read `prd/source/`.
+
 ## Commands
 
 Install once from the root with `vp install`; the workspace has one pnpm lockfile. Prefer `vp` commands and fall back to `pnpm` when `vp` is insufficient.

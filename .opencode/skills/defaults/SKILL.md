@@ -13,6 +13,11 @@ Before any task that writes code or uses a third-party library, fetch current do
 
 ## Task types
 
+### Product and project information
+
+- When a task needs information about the product or project being built, such as features, requirements, roles, business rules, entities, or workflows, load the `prd` skill before planning or writing code. Read only the reference files it points to for the task.
+- The PRD says what to build. It does not set the stack; the repo's `AGENTS.md` and package manifests do.
+
 ### Vue and Nuxt code
 
 - Before writing or changing any Vue code, load the `vue-best-practices` skill.
