@@ -1,141 +1,131 @@
 # Self-hosting with Docker
 
-This setup runs the current MedCore web app, API, and PostgreSQL on one machine.
-It builds production-mode applications, but it is not a complete, secure hospital
-deployment. The app is still under development. Do not use real patient data
-without a security, privacy, backup, and compliance review.
+Runs the web app, API, and PostgreSQL as production builds on one machine.
 
-The web app listens only on the host machine at `http://localhost:3000` by
-default. HTTP is not encrypted. Do not expose it to the internet or a network
-containing untrusted users. Public deployment requires a properly configured HTTPS
-reverse proxy, a domain, and additional operational and security controls.
+> [!WARNING]
+> MedCore HMS is under active development. This stack is not a complete or secure hospital deployment. Do not use real patient data without a security, privacy, backup, and compliance review.
+>
+> The web app listens on `127.0.0.1` only, over unencrypted HTTP. Do not expose it to the internet or untrusted networks. Public deployment needs an HTTPS reverse proxy, a domain, and operational and security controls.
+
+## Table of contents
+
+- [Prerequisites](#prerequisites)
+- [Configure](#configure)
+- [Start and stop](#start-and-stop)
+- [Updates and backups](#updates-and-backups)
+- [Troubleshooting](#troubleshooting)
 
 ## Prerequisites
 
-- Docker Engine, Docker Compose, and the Docker Buildx plugin, with Docker running.
-  Check Buildx with `docker buildx version`. The root `.dockerignore` keeps `.env`,
-  `node_modules`, and build output out of the build context.
-- Vite+ to run the root package script. You can also use Docker Compose directly
-  without Vite+.
-- `openssl` to generate secrets.
-- A checkout of this repository, with enough disk space to build images and store
-  PostgreSQL data.
+| Requirement                          | Notes                                                                   |
+| ------------------------------------ | ----------------------------------------------------------------------- |
+| Docker Engine with Compose           | Docker must be running. Check with `docker info`.                       |
+| Docker Buildx plugin                 | Check with `docker buildx version`.                                     |
+| [Vite+](https://viteplus.dev/guide/) | Optional. Runs the `vp run docker:up` and `vp run docker:down` scripts. |
+| `openssl`                            | Generates secrets.                                                      |
+| Disk space                           | Enough for image builds and the PostgreSQL data volume.                 |
 
-Run the commands below from the repository root.
+Run all commands from the repository root.
 
 ## Configure
 
-Docker Compose reads the same root `.env` as local development. It has no separate
-Docker env file.
+The stack reads the root `.env`.
 
-1. Create the file if it does not exist, without overwriting an existing one:
+1. Create the file without overwriting an existing one:
 
    ```sh
    cp -n .env.example .env
    ```
 
-2. Set these values in `.env` before the first start:
+2. Set these values before the first start:
 
-   - `POSTGRES_USER`, `POSTGRES_DB`: the user and database the stack creates. The
-     defaults are `medcore`. They are also part of the container `DATABASE_URL`, so
-     change them before the first start, or not at all.
-   - `POSTGRES_PASSWORD`: run `openssl rand -hex 32`. Use hexadecimal output, because
-     the value is embedded in a database URL.
-   - `BETTER_AUTH_SECRET`: run `openssl rand -hex 32` again. Use a different value.
-   - `BETTER_AUTH_URL=http://localhost:3000` and `WEB_PORT=3000` for the default
-     setup. If you change the port, update both so `BETTER_AUTH_URL` matches the
-     browser address. It controls authentication origins and callbacks.
-
-   `vp run docker:up` validates these first: it refuses to start when
-   `POSTGRES_USER` or `POSTGRES_DB` is empty, `POSTGRES_PASSWORD` is under 16
-   characters, `BETTER_AUTH_SECRET` is under 32, or a URL or port is malformed.
+   | Variable             | Value                                                       |
+   | -------------------- | ----------------------------------------------------------- |
+   | `POSTGRES_USER`      | Database user. Default `medcore`.                           |
+   | `POSTGRES_DB`        | Database name. Default `medcore-db`.                        |
+   | `POSTGRES_PASSWORD`  | `openssl rand -hex 32`. At least 16 characters.             |
+   | `BETTER_AUTH_SECRET` | `openssl rand -hex 32`. At least 32 characters.             |
+   | `BETTER_AUTH_URL`    | `http://localhost:3000`, or the origin your browser uses.   |
+   | `WEB_PORT`           | `3000`, or another free port. Must match `BETTER_AUTH_URL`. |
 
 3. Keep `.env` private and back it up securely. Do not commit it.
 
-Local development uses the same file. Its `BETTER_AUTH_URL` is
-`http://localhost:5173`, so switching between development and Docker means changing
-`BETTER_AUTH_URL` (and `WEB_PORT`) in `.env`. Changing `POSTGRES_PASSWORD` also
-affects the local development database: that database keeps the password it was
-created with, so update `DATABASE_URL` to match, or keep local development on a
-separate copy of the repository.
+`vp run docker:up` checks these values first and stops if one is invalid. The rules are in [`scripts/env/schema.ts`](../scripts/env/schema.ts).
 
-PostgreSQL uses `POSTGRES_USER`, `POSTGRES_DB` and `POSTGRES_PASSWORD` only when
-its data volume is first created. Changing them later does not change the existing
-database. Do not delete the volume to resolve a mismatch: it contains your data.
-`vp run docker:down` deletes that volume, so back up first.
+> [!CAUTION]
+> `POSTGRES_USER`, `POSTGRES_DB`, and `POSTGRES_PASSWORD` apply only when the `postgres-data` volume is created. Later changes do not alter the existing database. Do not delete the volume to fix a mismatch, because it holds your data.
+
+> [!NOTE]
+> Local development ([setup guide](setup.md)) uses the same `.env` and the same `postgres-data` volume, so both modes share one database. Its `BETTER_AUTH_URL` is `http://localhost:5173`. Change `BETTER_AUTH_URL` and `WEB_PORT` when you switch between modes.
 
 ## Start and stop
+
+Start the stack:
 
 ```sh
 vp run docker:up
 ```
 
-Alternatively, run:
+Without Vite+:
 
 ```sh
-docker buildx version && DOCKER_BUILDKIT=1 docker compose -f compose.yaml up --build -d
+DOCKER_BUILDKIT=1 docker compose -f compose.yaml up --build -d
 ```
 
-Compose reads `.env` from the repository root automatically.
+The first build can take several minutes. Compose starts PostgreSQL, waits until it is healthy, applies migrations, then starts the API and the web app.
 
-The first build downloads dependencies and can take several minutes. Compose
-starts PostgreSQL, waits for it to become healthy, runs committed migrations, and
-then starts the API and web app. Open <http://localhost:3000>.
+Open <http://localhost:3000>.
 
-Inspect status and logs:
+Check status and logs:
 
 ```sh
 docker compose -f compose.yaml ps -a
 docker compose -f compose.yaml logs --tail=100
 ```
 
-Stop the services and delete the database volume:
-
-```sh
-vp run docker:down
-```
-
-That command passes `--volumes`, so it removes the `postgres-data` volume and all
-database data with it. This cannot be undone; recovery needs a backup. Compose
-still reads `.env` for interpolation, so the required values must be present.
-
-To stop the services and keep database data, run:
+Stop the stack and keep data:
 
 ```sh
 docker compose -f compose.yaml down
 ```
 
-Never add `--volumes` to that command unless you intentionally want to delete the
-database permanently.
+Stop the stack and delete data:
+
+```sh
+vp run docker:down
+```
+
+> [!CAUTION]
+> `vp run docker:down` runs `docker compose down --volumes`. It deletes the `postgres-data` volume and all database data. Back up first. Recovery is not possible without a backup.
 
 ## Updates and backups
 
-Before updating, securely back up the database and `.env`. Test restoration
-on a separate installation. Updating the source and running `vp run docker:up`
-rebuilds images and runs pending migrations automatically. Migrations may change
-the schema; rolling back an image alone may not roll back the database.
+Back up the database and `.env` before every update. Test restores on a separate installation.
 
-To create a logical PostgreSQL backup while the stack is running:
+Update the source, then run `vp run docker:up`. Images are rebuilt and pending migrations apply automatically. A migration can change the schema, so rolling back an image alone does not roll back the database.
+
+### Back up
+
+With the stack running:
 
 ```sh
-docker compose -f compose.yaml exec -T postgres \
+docker compose -f compose.yaml exec -T db \
   sh -c 'pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Fc' > medcore-backup.dump
 ```
 
-The backup contains sensitive data. Encrypt it, restrict access, and store a copy
-off the host. Check that the command succeeded and the file is nonempty.
-For recovery, stop application writes and restore into a separate empty PostgreSQL
-database using `pg_restore` with a compatible PostgreSQL version. Verify the
-restore before replacing any installation; restoring over live data can destroy it.
-Plan and test a recovery procedure appropriate to your environment.
+> [!WARNING]
+> The dump contains sensitive data. Encrypt it, restrict access, and store a copy off the host. Confirm the command succeeded and the file is not empty.
+
+### Restore
+
+Restore into a separate, empty PostgreSQL database with `pg_restore` and a compatible PostgreSQL version. Verify the restored data before you replace any installation. Restoring over live data can destroy it.
 
 ## Troubleshooting
 
-- If Compose cannot connect, start Docker and check `docker info`.
-- If Compose reports a missing variable, add it to `.env` and rerun startup.
-- If port 3000 is occupied, choose another `WEB_PORT` and update
-  `BETTER_AUTH_URL` to match.
-- If startup fails, inspect the logs above. A failed migration prevents the API
-  from starting; do not delete the database to bypass the error.
-- Keep `BETTER_AUTH_SECRET` stable across restarts. Losing it can invalidate
-  existing authentication data.
+| Symptom                | Action                                                                                         |
+| ---------------------- | ---------------------------------------------------------------------------------------------- |
+| Compose cannot connect | Start Docker, then check `docker info`.                                                        |
+| Missing variable error | Add the variable to `.env` and run the start command again.                                    |
+| Port 3000 is in use    | Set another `WEB_PORT` and update `BETTER_AUTH_URL` to match.                                  |
+| Startup fails          | Read the logs. A failed migration stops the API. Do not delete the database to bypass it.      |
+| Users are signed out   | Check that `BETTER_AUTH_SECRET` is unchanged. A different value invalidates existing sessions. |

@@ -7,7 +7,7 @@ MedCore HMS is a pnpm workspace orchestrated with Turborepo. The root is the onl
 - `apps/web/` — Nuxt 4 web app. It keeps Nuxt UI, Tailwind CSS, Nuxt Icon, Nuxt Fonts, Nuxt Image, and TanStack Vue Query.
 - `apps/api/` — standalone Nitro 3 API server. `server/api/hello.ts` is the scaffold sample.
 - `apps/shared/` — private TypeScript package for code shared by the apps. It has an empty `src/index.ts` entry point and local tooling, with no runtime dependency from the apps yet.
-- `packages/db/` — private `@medcore/db` package with the Drizzle ORM PostgreSQL schema, relations, client, migrations, and a `compose.yaml` for local PostgreSQL.
+- `packages/db/` — private `@medcore/db` package with the Drizzle ORM PostgreSQL schema, relations, client, Drizzle config, and migrations.
 - `scripts/` — root Node tooling that is not a workspace package. `scripts/env/` validates the environment (`schema.ts` rules, `index.ts` CLI); `scripts/tsconfig.json` covers this directory.
 - Root files — workspace policy, Turbo tasks, lint/format configuration, and Vite+ hook configuration.
 
@@ -34,7 +34,7 @@ Run a package command with `vp run '@medcore/web#<script>'`, `vp run '@medcore/a
 
 Environment variables are validated in one place: `scripts/env/` (zod rules in `schema.ts`, entry `index.ts`; groups `web`, `api`, `db`, `docker`). The root `dev`, `build`, `preview`, `docker:up`, and `db:*` scripts run it first and stop with a pretty-printed error if a value is invalid. Apps and packages do not validate env themselves; package-qualified commands such as `vp run '@medcore/web#dev'` skip the check. Add or change a variable in `scripts/env/schema.ts` and `.env.example` together.
 
-Drizzle lifecycle commands are root scripts that validate the env, then call `@medcore/db`: `vp run db:generate`, `db:migrate`, `db:push`, `db:pull`, `db:studio`, `db:check`, and `db:up`. Local PostgreSQL is defined in `packages/db/compose.yaml`. Run it with `docker compose --env-file .env -f packages/db/compose.yaml up -d`.
+Drizzle lifecycle commands are root scripts that validate the env, then call `@medcore/db`: `vp run db:generate`, `db:migrate`, `db:push`, `db:pull`, `db:studio`, `db:check`, and `db:up`. Local PostgreSQL is the `db` service in the root `compose.yaml`. Start it with `docker compose up -d db`.
 
 All environment variables live in one ignored root `.env`; copy the tracked `.env.example` to create it. Ports and other variables come from that file. `WEB_DEV_PORT` (5173) and `WEB_PREVIEW_PORT` (4173) cover web dev and preview; `API_PORT` (8000) covers API dev, preview, and the built-server `start` command. Process environment variables override file values.
 

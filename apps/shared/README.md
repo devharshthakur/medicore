@@ -1,6 +1,6 @@
 # @medcore/shared
 
-Private TypeScript package for code shared across the MedCore HMS apps. It is not yet used by the apps.
+Private TypeScript package for code shared across the MedCore HMS apps. No app imports it yet.
 
 The entry point is `src/index.ts`.
 
@@ -13,3 +13,16 @@ Run from the repository root with `vp run '@medcore/shared#<script>'`.
 | `lint`      | Lint with ESLint (`lint:fix` to apply fixes)    |
 | `typecheck` | Type-check with `tsc`                           |
 | `format`    | Format with Prettier (`format:check` to verify) |
+
+## Project structure
+
+```text
+apps/shared/
+├── src/
+│   └── index.ts
+├── eslint.config.mjs
+├── package.json
+├── prettier.config.js
+├── README.md
+└── tsconfig.json
+```
