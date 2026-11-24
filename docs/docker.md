@@ -62,6 +62,7 @@ separate copy of the repository.
 PostgreSQL uses `POSTGRES_USER`, `POSTGRES_DB` and `POSTGRES_PASSWORD` only when
 its data volume is first created. Changing them later does not change the existing
 database. Do not delete the volume to resolve a mismatch: it contains your data.
+`vp run docker:down` deletes that volume, so back up first.
 
 ## Start and stop
 
@@ -88,7 +89,17 @@ docker compose -f compose.yaml ps -a
 docker compose -f compose.yaml logs --tail=100
 ```
 
-Stop the services without deleting database data:
+Stop the services and delete the database volume:
+
+```sh
+vp run docker:down
+```
+
+That command passes `--volumes`, so it removes the `postgres-data` volume and all
+database data with it. This cannot be undone; recovery needs a backup. Compose
+still reads `.env` for interpolation, so the required values must be present.
+
+To stop the services and keep database data, run:
 
 ```sh
 docker compose -f compose.yaml down

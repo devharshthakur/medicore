@@ -7,6 +7,7 @@
     "dev": "vpx scripts/env/index.ts api web && turbo run dev",
     "preview": "vpx scripts/env/index.ts api web && turbo run preview",
     "docker:up": "vpx scripts/env/index.ts docker && docker buildx version >/dev/null && DOCKER_BUILDKIT=1 docker compose -f compose.yaml up --build -d",
+    "docker:down": "docker compose -f compose.yaml down --volumes",
     "db:generate": "vpx scripts/env/index.ts db && vp run '@medcore/db#db:generate'",
     "db:migrate": "vpx scripts/env/index.ts db && vp run '@medcore/db#db:migrate'",
     "db:push": "vpx scripts/env/index.ts db && vp run '@medcore/db#db:push'",

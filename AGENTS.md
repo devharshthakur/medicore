@@ -25,6 +25,7 @@ Root scripts run through Turbo:
 - `vp run build`
 - `vp run preview` — builds first; web on `http://localhost:4173`, API on `http://localhost:8000`
 - `vp run docker:up` — builds and starts the Docker stack (`docs/docker.md`)
+- `vp run docker:down` — stops the Docker stack and deletes its database volume
 - `vp run lint` / `vp run lint:fix`
 - `vp run typecheck` — Turbo packages only; run `vp run typecheck:scripts` for `scripts/`
 - `vp run format` / `vp run format:check`
