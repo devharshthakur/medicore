@@ -1,11 +1,6 @@
-/**
- * @typedef {import('prettier').Config} PrettierConfig
- */
+// Extend the shared Prettier defaults; add root-level overrides here.
+import baseConfig from '@medcore/prettier-config';
 
-/** @type {PrettierConfig} */
-const config = {
-  printWidth: 400,
-  singleQuote: true,
+export default {
+  ...baseConfig,
 };
-
-export default config;

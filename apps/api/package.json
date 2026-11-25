@@ -27,6 +27,7 @@
     "tsx": "4.23.15"
   },
   "devDependencies": {
+    "@medcore/prettier-config": "workspace:*",
     "@types/node": "26.6.6",
     "rolldown": "1.2.1",
     "typescript-eslint": "8.73.0"
