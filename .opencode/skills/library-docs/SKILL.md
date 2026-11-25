@@ -23,6 +23,7 @@ A source is "provided" only when it is configured and available in the current s
 | --- | --- | --- | --- | --- |
 | Nitro | none | none | maintained: `references/docs/nitro.md` | Sitemap |
 | Nuxt | none | `nuxt` | maintained: `references/docs/nuxt.md` | Skill; sitemap only if skill is unavailable |
+| Vite+ (`vp`) | none | none | maintained: `references/docs/viteplus.md` | Sitemap |
 | Nuxt UI | not configured | `nuxt-ui` | live site sitemap if needed | Skill |
 | Vue | none | Vue skills | none | Matching skill |
 | Drizzle ORM/Kit | `drizzle` | `drizzle` | none | MCP |
@@ -35,7 +36,7 @@ Follow `references/sitemaps.md`. In short:
 
 1. Use a maintained index under `references/docs/` when present; otherwise discover the official live sitemap.
 2. Choose the closest page by section and title.
-3. Fetch only that URL with `webfetch`. Nitro links return MDX source; Nuxt links return Markdown, though some Nuxt entries are HTML pages and must be fetched as HTML.
+3. Fetch only that URL with `webfetch`, except when using the Vite+ full-document option in its maintained index. Nitro links return MDX source; Vite+ links return Markdown; Nuxt links return Markdown, though some Nuxt entries are HTML pages and must be fetched as HTML.
 4. Cite the page URL when reporting behavior.
 5. If the page is missing or insufficient, continue with Context7, then web search.
 

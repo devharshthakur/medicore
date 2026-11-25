@@ -8,9 +8,10 @@ Check this folder for a maintained index before searching the web:
 
 - [Nuxt](docs/nuxt.md)
 - [Nitro](docs/nitro.md)
+- [Vite+](docs/viteplus.md)
 
 1. Choose the closest page by section and title.
-2. Fetch only that URL. Raw or `.md` links return source; pages without a markdown form must be fetched as HTML.
+2. Fetch only that URL, except when using the full-document option in the Vite+ index. Raw or `.md` links return source; pages without a markdown form must be fetched as HTML.
 3. Cite the page URL when reporting behavior.
 4. Indexes are snapshots and may be stale. If a link fails or contradicts the installed version, inspect the upstream repository and state the version difference.
 
