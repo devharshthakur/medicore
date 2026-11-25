@@ -32,9 +32,11 @@
     "vue-router": "5.5.1"
   },
   "devDependencies": {
+    "@medcore/prettier-config": "workspace:*",
     "@nuxt/eslint": "1.17.0",
     "@types/node": "26.6.6",
     "eslint-plugin-better-tailwindcss": "4.11.0",
+    "prettier-plugin-tailwindcss": "0.8.1",
     "tsx": "4.23.15",
     "vue-tsc": "3.3.14"
   }

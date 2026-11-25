@@ -24,11 +24,13 @@
     "prepare": "vp hooks enable"
   },
   "devDependencies": {
+    "@medcore/prettier-config": "workspace:*",
     "@opencode/plugin": "2.4.1",
     "@types/node": "26.6.6",
     "eslint": "10.15.0",
     "eslint-config-prettier": "10.1.8",
     "prettier": "3.10.1",
+    "prettier-plugin-tailwindcss": "0.8.1",
     "turbo": "2.11.13",
     "typescript": "6.0.3",
     "vite-plus": "1.7.0",
