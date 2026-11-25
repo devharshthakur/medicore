@@ -16,6 +16,10 @@ node_modules
 logs
 *.log
 
+# Office document viewer temp/lock files
+.~lock.*#
+~$*
+
 # Misc
 .DS_Store
 .fleet
