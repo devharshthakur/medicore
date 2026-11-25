@@ -1,6 +1,6 @@
-// Extend the root Prettier defaults; add package-specific overrides here.
-import rootConfig from '../../prettier.config.js';
+// Extend the shared Prettier defaults; add package-specific overrides here.
+import baseConfig from '@medcore/prettier-config';
 
 export default {
-  ...rootConfig,
+  ...baseConfig,
 };
