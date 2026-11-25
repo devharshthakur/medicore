@@ -15,6 +15,8 @@ export default defineConfig({
     'apps/api/**/*.{json,jsonc,md,css,scss,html,yml,yaml}': 'prettier --config apps/api/prettier.config.js --ignore-path apps/api/.prettierignore --write',
     'apps/shared/**/*.{json,jsonc,md,css,scss,html,yml,yaml}': 'prettier --config apps/shared/prettier.config.js --ignore-path apps/shared/.prettierignore --write',
     'packages/db/**/*.{json,jsonc,md,css,scss,html,yml,yaml}': 'prettier --config packages/db/prettier.config.js --ignore-path packages/db/.prettierignore --write',
+    'packages/prettier-config/**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}': 'prettier --config packages/prettier-config/prettier.config.js --ignore-path packages/prettier-config/.prettierignore --write',
+    'packages/prettier-config/**/*.{json,jsonc,md,css,scss,html,yml,yaml}': 'prettier --config packages/prettier-config/prettier.config.js --ignore-path packages/prettier-config/.prettierignore --write',
     './*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}': 'prettier --config prettier.config.js --ignore-path .prettierignore --write',
     './*.{json,jsonc,md,css,scss,html,yml,yaml}': 'prettier --config prettier.config.js --ignore-path .prettierignore --write',
     '.vscode/*.json': 'prettier --config prettier.config.js --ignore-path .prettierignore --write',
