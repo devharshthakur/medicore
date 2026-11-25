@@ -30,7 +30,7 @@ services:
     build:
       <<: *build
       target: migrate
-    command: ['pnpm', 'run', 'db:migrate']
+    command: ['vp', 'run', 'db:migrate']
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER:?Set POSTGRES_USER in .env}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/${POSTGRES_DB:?Set POSTGRES_DB in .env}
     depends_on:
