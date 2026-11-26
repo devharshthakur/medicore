@@ -1,7 +1,8 @@
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
-export default tseslint.config(
+export default defineConfig(
   {
     ignores: ['.output/**', '.nitro/**', '.cache/**', '.turbo/**', 'dist/**', 'coverage/**', 'drizzle/**'],
   },
@@ -12,6 +13,6 @@ export default tseslint.config(
       },
     },
   },
-  ...tseslint.configs.recommended,
+  tseslint.configs.recommended,
   eslintConfigPrettier,
 );
