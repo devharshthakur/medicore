@@ -19,7 +19,10 @@ const optionalPort = port.optional();
 
 const httpUrl = z.url({ protocol: /^https?$/, error: 'must be an http or https URL' });
 
-const postgresUrl = z.url({ protocol: /^postgres(ql)?$/, error: 'must be a postgres:// or postgresql:// URL' });
+const postgresUrl = z.url({
+  protocol: /^postgres(ql)?$/,
+  error: 'must be a postgres:// or postgresql:// URL',
+});
 
 // Signing secrets must be long enough to resist guessing.
 const secret = z.string().min(32, 'must be at least 32 characters (generate one with `openssl rand -base64 32`)');

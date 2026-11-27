@@ -19,16 +19,16 @@ A source is "provided" only when it is configured and available in the current s
 
 ## Current sources
 
-| Library | MCP server | Skill | Sitemap | Route |
-| --- | --- | --- | --- | --- |
-| Nitro | none | none | maintained: `references/docs/nitro.md` | Sitemap |
-| Nuxt | none | `nuxt` | maintained: `references/docs/nuxt.md` | Skill; sitemap only if skill is unavailable |
-| Vite+ (`vp`) | none | none | maintained: `references/docs/viteplus.md` | Sitemap |
-| Nuxt UI | not configured | `nuxt-ui` | live site sitemap if needed | Skill |
-| Vue | none | Vue skills | none | Matching skill |
-| Drizzle ORM/Kit | `drizzle` | `drizzle` | none | MCP |
-| Tailwind CSS | none | none | none | Context7, then web search |
-| TanStack Vue Query | none | none | none | Context7, then web search |
+| Library            | MCP server     | Skill      | Sitemap                                   | Route                                       |
+| ------------------ | -------------- | ---------- | ----------------------------------------- | ------------------------------------------- |
+| Nitro              | none           | none       | maintained: `references/docs/nitro.md`    | Sitemap                                     |
+| Nuxt               | none           | `nuxt`     | maintained: `references/docs/nuxt.md`     | Skill; sitemap only if skill is unavailable |
+| Vite+ (`vp`)       | none           | none       | maintained: `references/docs/viteplus.md` | Sitemap                                     |
+| Nuxt UI            | not configured | `nuxt-ui`  | live site sitemap if needed               | Skill                                       |
+| Vue                | none           | Vue skills | none                                      | Matching skill                              |
+| Drizzle ORM/Kit    | `drizzle`      | `drizzle`  | none                                      | MCP                                         |
+| Tailwind CSS       | none           | none       | none                                      | Context7, then web search                   |
+| TanStack Vue Query | none           | none       | none                                      | Context7, then web search                   |
 
 ## Using a sitemap
 
