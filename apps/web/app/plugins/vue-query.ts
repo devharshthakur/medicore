@@ -1,7 +1,5 @@
 import type { DehydratedState, VueQueryPluginOptions } from '@tanstack/vue-query'
 import { QueryClient, VueQueryPlugin, dehydrate, hydrate } from '@tanstack/vue-query'
-// Nuxt app aliases
-import { defineNuxtPlugin, useState } from '#imports'
 
 export default defineNuxtPlugin((nuxt) => {
   const vueQueryState = useState<DehydratedState | null>('vue-query')
