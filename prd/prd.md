@@ -1,15 +1,15 @@
-MedCore HMS  —  Product Requirements Document    \|    Confidential
+MedCore HMS — Product Requirements Document \| Confidential
 
-| PRODUCT REQUIREMENTS DOCUMENT<br>MedCore HMS<br>Hospital Management Platform<br>Version 1.0  \|  Solo Developer Project Brief<br>Full Stack Development Project<br>Academic Year 2024 – 2025 |
-| --- |
+| PRODUCT REQUIREMENTS DOCUMENT<br>MedCore HMS<br>Hospital Management Platform<br>Version 1.0 \| Solo Developer Project Brief<br>Full Stack Development Project<br>Academic Year 2024 – 2025 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 | Classification<br>Individual Project | Difficulty<br>Advanced | Team Size<br>1 Person | Duration<br>4 Weeks |
-| --- | --- | --- | --- |
+| ------------------------------------ | ---------------------- | --------------------- | ------------------- |
 
 <br>
 
-| 01  Executive Overview |
-| --- |
+| 01 Executive Overview |
+| --------------------- |
 
 # Project Overview
 
@@ -17,8 +17,8 @@ MedCore HMS is a full-stack, cloud-native Hospital Management Platform designed 
 
 This project challenges you to design, architect, and build a production-grade SaaS product — the kind that could realistically be licensed to hospital chains, diagnostic centres, and tele-health providers.
 
-| 💡  Hint:  Before writing any code, spend time reading how Epic Systems and Practo structure their patient encounter workflows. Understanding the domain first will help you model the database correctly. |
-| --- |
+| 💡 Hint: Before writing any code, spend time reading how Epic Systems and Practo structure their patient encounter workflows. Understanding the domain first will help you model the database correctly. |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Background & Problem Statement
 
@@ -26,8 +26,8 @@ A large teaching hospital processes roughly 600–900 outpatient encounters per 
 
 The outcome is delayed clinical decisions, duplicate diagnostic tests, billing errors, and poor patient experience. MedCore HMS eliminates these friction points through a unified, role-aware, real-time platform.
 
-| 💡  Hint:  Map out the existing paper-based or legacy workflow for at least one hospital department before designing your data models. Real requirements always hide inside processes, not in feature lists. |
-| --- |
+| 💡 Hint: Map out the existing paper-based or legacy workflow for at least one hospital department before designing your data models. Real requirements always hide inside processes, not in feature lists. |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Product Vision
 
@@ -35,8 +35,8 @@ Build a scalable, HIPAA-aware Hospital Management System that serves hospitals r
 
 <br>
 
-| 02  Project Scope |
-| --- |
+| 02 Project Scope |
+| ---------------- |
 
 # In-Scope Features
 
@@ -54,8 +54,8 @@ Build a scalable, HIPAA-aware Hospital Management System that serves hospitals r
 
 - Department and doctor profile setup
 
-| 💡  Hint:  Do not skip the database design phase. Spend your first two days drawing the ER diagram and writing the Prisma schema before touching any API code. Changing a schema mid-project is painful. |
-| --- |
+| 💡 Hint: Do not skip the database design phase. Spend your first two days drawing the ER diagram and writing the Prisma schema before touching any API code. Changing a schema mid-project is painful. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 ### Week 2 — Appointments, EMR & Prescriptions
 
@@ -71,8 +71,8 @@ Build a scalable, HIPAA-aware Hospital Management System that serves hospitals r
 
 - Prescription module — medicine search, dosage, frequency, PDF export
 
-| 💡  Hint:  Start with the authentication and RBAC layer. Everything else builds on top of it. Spend an extra day here — a poorly designed permission model will cause cascading refactors later. |
-| --- |
+| 💡 Hint: Start with the authentication and RBAC layer. Everything else builds on top of it. Spend an extra day here — a poorly designed permission model will cause cascading refactors later. |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ### Week 3 — Lab, Pharmacy, Billing & Notifications
 
@@ -86,8 +86,8 @@ Build a scalable, HIPAA-aware Hospital Management System that serves hospitals r
 
 - Patient portal: view records, download reports, track invoices, make payments
 
-| 💡  Hint:  Billing always takes longer than estimated. On Day 1 of Week 3, wire up the invoice data model first, then add payment gateway integration. Do not leave payment webhooks to the last day. |
-| --- |
+| 💡 Hint: Billing always takes longer than estimated. On Day 1 of Week 3, wire up the invoice data model first, then add payment gateway integration. Do not leave payment webhooks to the last day. |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ### Week 4 — Frontend Polish, Analytics, Testing & Deployment
 
@@ -117,8 +117,8 @@ Build a scalable, HIPAA-aware Hospital Management System that serves hospitals r
 
 <br>
 
-| 03  System Architecture |
-| --- |
+| 03 System Architecture |
+| ---------------------- |
 
 # Architecture Overview
 
@@ -126,11 +126,11 @@ MedCore HMS follows a clean, layered architecture that separates concerns betwee
 
 ## High-Level Component Diagram (Text Representation)
 
-| [ Browser / PWA ]  ←→  [ Next.js 15 Frontend ]<br>                              ↕  HTTPS / REST + WebSocket<br>[ Nginx Reverse Proxy ]  ←→  [ NestJS API (port 3001) ]<br>                              ↕  Prisma ORM<br>[ PostgreSQL ]   [ Redis Cache ]   [ AWS S3 / Cloudinary ]<br>[ Socket.IO Server ]  ←→  Real-time event bus |
-| --- |
+| [ Browser / PWA ] ←→ [ Next.js 15 Frontend ]<br> ↕ HTTPS / REST + WebSocket<br>[ Nginx Reverse Proxy ] ←→ [ NestJS API (port 3001) ]<br> ↕ Prisma ORM<br>[ PostgreSQL ] [ Redis Cache ] [ AWS S3 / Cloudinary ]<br>[ Socket.IO Server ] ←→ Real-time event bus |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-| 💡  Hint:  Draw this diagram properly in Excalidraw or draw.io and include it in your project README. Reviewers and examiners always appreciate a well-drawn architecture diagram over a text representation. |
-| --- |
+| 💡 Hint: Draw this diagram properly in Excalidraw or draw.io and include it in your project README. Reviewers and examiners always appreciate a well-drawn architecture diagram over a text representation. |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Multi-Tenancy Strategy
 
@@ -138,72 +138,72 @@ Each hospital operates as a tenant. All database tables that hold hospital-speci
 
 Super Admins operate across tenants; all other roles are scoped to a single hospital at authentication time.
 
-| 💡  Hint:  Research the difference between database-per-tenant, schema-per-tenant, and row-level multi-tenancy. Justify in your report which approach you chose and why it suits this project's scale requirements. |
-| --- |
+| 💡 Hint: Research the difference between database-per-tenant, schema-per-tenant, and row-level multi-tenancy. Justify in your report which approach you chose and why it suits this project's scale requirements. |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Caching Strategy
 
 Redis is used for three purposes: (1) session storage for refresh tokens and device tracking, (2) short-lived caches for expensive read queries (doctor availability slots, medicine inventory counts), and (3) rate-limiting counters to protect public endpoints.
 
-| 💡  Hint:  A common mistake is over-caching. Cache only data that is read far more often than it is written. Doctor availability changes frequently — cache it with a TTL of 60 seconds, not 1 hour. |
-| --- |
+| 💡 Hint: A common mistake is over-caching. Cache only data that is read far more often than it is written. Doctor availability changes frequently — cache it with a TTL of 60 seconds, not 1 hour. |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 <br>
 
-| 04  Technology Stack |
-| --- |
+| 04 Technology Stack |
+| ------------------- |
 
 # Approved Technology Stack
 
 ## Frontend
 
-| Technology | Purpose |
-| --- | --- |
-| Next.js 15 (App Router) | Primary framework — SSR, RSC, file-based routing |
-| React 19 | UI library with concurrent features |
-| TypeScript | Strict static typing across the entire codebase |
-| Tailwind CSS | Utility-first styling — no custom CSS files |
-| Shadcn UI | Accessible component primitives built on Radix UI |
-| Framer Motion | Micro-animations and page transitions |
-| React Hook Form + Zod | Form state management with schema validation |
-| TanStack Query | Server state, caching, background refetch |
-| Zustand | Lightweight global client state (auth, theme, sidebar) |
+| Technology              | Purpose                                                |
+| ----------------------- | ------------------------------------------------------ |
+| Next.js 15 (App Router) | Primary framework — SSR, RSC, file-based routing       |
+| React 19                | UI library with concurrent features                    |
+| TypeScript              | Strict static typing across the entire codebase        |
+| Tailwind CSS            | Utility-first styling — no custom CSS files            |
+| Shadcn UI               | Accessible component primitives built on Radix UI      |
+| Framer Motion           | Micro-animations and page transitions                  |
+| React Hook Form + Zod   | Form state management with schema validation           |
+| TanStack Query          | Server state, caching, background refetch              |
+| Zustand                 | Lightweight global client state (auth, theme, sidebar) |
 
-| 💡  Hint:  Use the Next.js App Router's server components for data-heavy pages (patient list, analytics). Reserve client components for interactive widgets. Mixing them incorrectly is the most common Next.js 15 mistake. |
-| --- |
+| 💡 Hint: Use the Next.js App Router's server components for data-heavy pages (patient list, analytics). Reserve client components for interactive widgets. Mixing them incorrectly is the most common Next.js 15 mistake. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Backend
 
-| Technology | Purpose |
-| --- | --- |
-| NestJS | Enterprise Node.js framework — modules, guards, interceptors |
-| TypeScript | Shared types between frontend and backend via a types package |
-| Prisma ORM | Type-safe database access and migration management |
-| PostgreSQL 16 | Primary relational database |
-| Redis 7 | Caching, sessions, rate limiting |
-| Socket.IO | Bidirectional real-time events (notifications, chat) |
-| Passport.js | Authentication strategies (JWT, Google OAuth) |
-| Bull / BullMQ | Background job queues (email, PDF generation, reports) |
-| Multer + Sharp | File upload handling and image optimisation |
+| Technology     | Purpose                                                       |
+| -------------- | ------------------------------------------------------------- |
+| NestJS         | Enterprise Node.js framework — modules, guards, interceptors  |
+| TypeScript     | Shared types between frontend and backend via a types package |
+| Prisma ORM     | Type-safe database access and migration management            |
+| PostgreSQL 16  | Primary relational database                                   |
+| Redis 7        | Caching, sessions, rate limiting                              |
+| Socket.IO      | Bidirectional real-time events (notifications, chat)          |
+| Passport.js    | Authentication strategies (JWT, Google OAuth)                 |
+| Bull / BullMQ  | Background job queues (email, PDF generation, reports)        |
+| Multer + Sharp | File upload handling and image optimisation                   |
 
-| 💡  Hint:  NestJS's module system maps almost perfectly to your feature modules (AppointmentModule, LabModule, etc.). Design each module to be independently testable with no circular dependencies. |
-| --- |
+| 💡 Hint: NestJS's module system maps almost perfectly to your feature modules (AppointmentModule, LabModule, etc.). Design each module to be independently testable with no circular dependencies. |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Infrastructure & DevOps
 
-| Technology | Purpose |
-| --- | --- |
-| Docker + Docker Compose | Containerisation — identical dev and prod environments |
-| Nginx | Reverse proxy, SSL termination, rate limiting at edge |
-| GitHub Actions | CI/CD — lint, test, build, deploy on every push to main |
-| AWS (EC2 / RDS / S3) | Production compute, managed database, object storage |
-| Vercel | Frontend deployment with edge network |
-| Sentry | Error tracking and performance monitoring |
+| Technology              | Purpose                                                 |
+| ----------------------- | ------------------------------------------------------- |
+| Docker + Docker Compose | Containerisation — identical dev and prod environments  |
+| Nginx                   | Reverse proxy, SSL termination, rate limiting at edge   |
+| GitHub Actions          | CI/CD — lint, test, build, deploy on every push to main |
+| AWS (EC2 / RDS / S3)    | Production compute, managed database, object storage    |
+| Vercel                  | Frontend deployment with edge network                   |
+| Sentry                  | Error tracking and performance monitoring               |
 
 <br>
 
-| 05  Database Design |
-| --- |
+| 05 Database Design |
+| ------------------ |
 
 # PostgreSQL Schema Design
 
@@ -211,26 +211,26 @@ Design your Prisma schema to be normalised to 3NF. Below are the core entities a
 
 ## Core Entity Relationships
 
-| Entity | Relates To | Relationship |
-| --- | --- | --- |
-| Hospital | User, Department, Room | One Hospital → Many |
-| User | Role, Hospital | Many Users → One Hospital |
-| Doctor | User, Department, Appointment | One-to-One with User |
-| Patient | User, Hospital | One-to-One with User |
-| Appointment | Doctor, Patient, Department | Many-to-One each |
-| MedicalRecord | Appointment, Patient, Doctor | One Appointment → One Record |
-| Prescription | MedicalRecord, Medicine | Many-to-Many via PrescriptionItem |
-| LabOrder | MedicalRecord, LabTest | One Record → Many Orders |
-| Invoice | Appointment, Patient | One Appointment → One Invoice |
-| InvoiceItem | Invoice, (Lab/Pharmacy/Consult) | Many-to-One Invoice |
-| Notification | User, (linked entity) | Polymorphic recipient |
-| AuditLog | User, any entity | All write operations logged |
+| Entity        | Relates To                      | Relationship                      |
+| ------------- | ------------------------------- | --------------------------------- |
+| Hospital      | User, Department, Room          | One Hospital → Many               |
+| User          | Role, Hospital                  | Many Users → One Hospital         |
+| Doctor        | User, Department, Appointment   | One-to-One with User              |
+| Patient       | User, Hospital                  | One-to-One with User              |
+| Appointment   | Doctor, Patient, Department     | Many-to-One each                  |
+| MedicalRecord | Appointment, Patient, Doctor    | One Appointment → One Record      |
+| Prescription  | MedicalRecord, Medicine         | Many-to-Many via PrescriptionItem |
+| LabOrder      | MedicalRecord, LabTest          | One Record → Many Orders          |
+| Invoice       | Appointment, Patient            | One Appointment → One Invoice     |
+| InvoiceItem   | Invoice, (Lab/Pharmacy/Consult) | Many-to-One Invoice               |
+| Notification  | User, (linked entity)           | Polymorphic recipient             |
+| AuditLog      | User, any entity                | All write operations logged       |
 
-| 💡  Hint:  Model soft deletes on Patient, Doctor, and Appointment using a deletedAt timestamp rather than physically removing rows. Medical records must never be permanently deleted — this is both a legal and a clinical requirement. |
-| --- |
+| 💡 Hint: Model soft deletes on Patient, Doctor, and Appointment using a deletedAt timestamp rather than physically removing rows. Medical records must never be permanently deleted — this is both a legal and a clinical requirement. |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-| 💡  Hint:  Add a separate Address model rather than embedding address fields in every table. Hospitals, patients, and suppliers all have addresses — reuse the model. |
-| --- |
+| 💡 Hint: Add a separate Address model rather than embedding address fields in every table. Hospitals, patients, and suppliers all have addresses — reuse the model. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Key Design Decisions You Must Make
 
@@ -242,42 +242,42 @@ Design your Prisma schema to be normalised to 3NF. Below are the core entities a
 
 - What indexes will you create? At minimum: hospitalId, patientId, doctorId, appointmentDate, and any column used in WHERE clauses.
 
-| 💡  Hint:  Run EXPLAIN ANALYZE on your slowest queries during development. Add indexes based on what the query planner tells you, not on what you assume will be slow. |
-| --- |
+| 💡 Hint: Run EXPLAIN ANALYZE on your slowest queries during development. Add indexes based on what the query planner tells you, not on what you assume will be slow. |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 <br>
 
-| 06  Roles & Permissions |
-| --- |
+| 06 Roles & Permissions |
+| ---------------------- |
 
 # System Roles
 
-| Role | Primary Responsibilities |
-| --- | --- |
-| Super Admin | Platform-wide management, hospital onboarding, subscription billing, global analytics |
+| Role           | Primary Responsibilities                                                               |
+| -------------- | -------------------------------------------------------------------------------------- |
+| Super Admin    | Platform-wide management, hospital onboarding, subscription billing, global analytics  |
 | Hospital Admin | Configure hospital: departments, staff, beds, hospital-level analytics, billing config |
-| Doctor | Patient encounters, EMR, prescriptions, lab/radiology orders, availability calendar |
-| Nurse | Vitals recording, medication administration notes, ward management |
-| Receptionist | Patient registration, appointment scheduling, invoice generation |
-| Lab Technician | Receive test orders, upload results, approve reports |
-| Pharmacist | Verify prescriptions, dispense medicines, manage inventory |
-| Accountant | Financial reports, insurance claims, payment reconciliation |
-| Patient | View own records, book appointments, download reports, manage payments |
+| Doctor         | Patient encounters, EMR, prescriptions, lab/radiology orders, availability calendar    |
+| Nurse          | Vitals recording, medication administration notes, ward management                     |
+| Receptionist   | Patient registration, appointment scheduling, invoice generation                       |
+| Lab Technician | Receive test orders, upload results, approve reports                                   |
+| Pharmacist     | Verify prescriptions, dispense medicines, manage inventory                             |
+| Accountant     | Financial reports, insurance claims, payment reconciliation                            |
+| Patient        | View own records, book appointments, download reports, manage payments                 |
 
-| 💡  Hint:  Implement RBAC as a Guard in NestJS using a custom @Roles() decorator. Read the official NestJS documentation on custom guards before building this — the pattern is well established and will save you from re-architecting later. |
-| --- |
+| 💡 Hint: Implement RBAC as a Guard in NestJS using a custom @Roles() decorator. Read the official NestJS documentation on custom guards before building this — the pattern is well established and will save you from re-architecting later. |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-| 💡  Hint:  Create a permissions matrix spreadsheet before coding. List every API endpoint in one axis and all 9 roles in the other. Mark which roles can access each endpoint. This will become your test specification. |
-| --- |
+| 💡 Hint: Create a permissions matrix spreadsheet before coding. List every API endpoint in one axis and all 9 roles in the other. Mark which roles can access each endpoint. This will become your test specification. |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 <br>
 
-| 07  Module Specifications |
-| --- |
+| 07 Module Specifications |
+| ------------------------ |
 
 # Module Breakdown
 
-## 7.1  Authentication Module
+## 7.1 Authentication Module
 
 Authentication is the foundation of the platform. Every other module depends on knowing who the caller is and what they are allowed to do.
 
@@ -299,15 +299,15 @@ Authentication is the foundation of the platform. Every other module depends on 
 
 - POST /auth/logout — revoke refresh token in Redis
 
-- GET  /auth/me — return current user profile with permissions
+- GET /auth/me — return current user profile with permissions
 
-| 💡  Hint:  Store refresh tokens in Redis with the key pattern rt:{userId}:{deviceId}. This lets you invalidate a single device session or all sessions at once — useful for 'Log out of all devices'. |
-| --- |
+| 💡 Hint: Store refresh tokens in Redis with the key pattern rt:{userId}:{deviceId}. This lets you invalidate a single device session or all sessions at once — useful for 'Log out of all devices'. |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-| 💡  Hint:  Hash passwords with bcrypt at cost factor 12. Never log passwords, tokens, or OTPs — add a log sanitiser that strips these fields from all console output. |
-| --- |
+| 💡 Hint: Hash passwords with bcrypt at cost factor 12. Never log passwords, tokens, or OTPs — add a log sanitiser that strips these fields from all console output. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-## 7.2  Appointment Module
+## 7.2 Appointment Module
 
 The appointment module is the central scheduling engine. It must handle concurrent booking attempts gracefully and ensure no doctor is double-booked.
 
@@ -327,10 +327,10 @@ The appointment module is the central scheduling engine. It must handle concurre
 
 When two patients try to book the same slot simultaneously, only one should succeed. You must implement either database-level locking (SELECT FOR UPDATE) or an optimistic concurrency pattern.
 
-| 💡  Hint:  Research 'database row locking in PostgreSQL' and 'optimistic vs pessimistic concurrency control'. Implement whichever pattern you choose and document your reasoning in the report. |
-| --- |
+| 💡 Hint: Research 'database row locking in PostgreSQL' and 'optimistic vs pessimistic concurrency control'. Implement whichever pattern you choose and document your reasoning in the report. |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-## 7.3  Electronic Medical Records (EMR)
+## 7.3 Electronic Medical Records (EMR)
 
 A Medical Record is created when a doctor starts an appointment encounter. It is append-only — doctors can add notes but cannot delete past entries.
 
@@ -352,10 +352,10 @@ A Medical Record is created when a doctor starts an appointment encounter. It is
 
 - Attached files: scanned documents, images (stored in S3, max 20 MB per file)
 
-| 💡  Hint:  HIPAA requires that medical records be encrypted at rest and in transit. For this project, enable PostgreSQL column-level encryption for diagnosis and notes fields, or document why row-level security is sufficient. |
-| --- |
+| 💡 Hint: HIPAA requires that medical records be encrypted at rest and in transit. For this project, enable PostgreSQL column-level encryption for diagnosis and notes fields, or document why row-level security is sufficient. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-## 7.4  Prescription Module
+## 7.4 Prescription Module
 
 Doctors issue prescriptions at the end of an encounter. The prescription is linked to a medical record and can be printed or downloaded as a signed PDF.
 
@@ -371,10 +371,10 @@ Doctors issue prescriptions at the end of an encounter. The prescription is link
 
 - Digital signature of the doctor (stored as SVG or PNG, overlaid on PDF)
 
-| 💡  Hint:  Generate prescription PDFs using Puppeteer (headless Chrome) rather than a PDF library — you can design a proper HTML template and convert it. The output looks far more professional and can include the hospital letterhead. |
-| --- |
+| 💡 Hint: Generate prescription PDFs using Puppeteer (headless Chrome) rather than a PDF library — you can design a proper HTML template and convert it. The output looks far more professional and can include the hospital letterhead. |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-## 7.5  Laboratory Module
+## 7.5 Laboratory Module
 
 Lab technicians receive orders generated by doctors during an encounter. Results are uploaded and go through a review workflow before the patient can see them.
 
@@ -390,10 +390,10 @@ Lab technicians receive orders generated by doctors during an encounter. Results
 
 - Patient and Doctor are notified — report is now visible in both portals
 
-| 💡  Hint:  Model lab test reference ranges (e.g., Haemoglobin: 13.0–17.5 g/dL for males) in the database so the system can automatically flag out-of-range values in red on the report. |
-| --- |
+| 💡 Hint: Model lab test reference ranges (e.g., Haemoglobin: 13.0–17.5 g/dL for males) in the database so the system can automatically flag out-of-range values in red on the report. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-## 7.6  Pharmacy Module
+## 7.6 Pharmacy Module
 
 The pharmacy manages medicine stock and fulfils prescriptions. Expiry tracking and low-stock alerts are critical patient-safety features.
 
@@ -407,10 +407,10 @@ The pharmacy manages medicine stock and fulfils prescriptions. Expiry tracking a
 
 - Expired stock is flagged and must be quarantined — it cannot be dispensed.
 
-| 💡  Hint:  Implement a nightly BullMQ job that scans for medicines expiring within 30 days and sends a report to the Pharmacist and Hospital Admin. This simulates a real production job that prevents patient-safety incidents. |
-| --- |
+| 💡 Hint: Implement a nightly BullMQ job that scans for medicines expiring within 30 days and sends a report to the Pharmacist and Hospital Admin. This simulates a real production job that prevents patient-safety incidents. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
-## 7.7  Billing & Payments
+## 7.7 Billing & Payments
 
 The billing module aggregates charges from all departments (consultation fee, lab tests, medicines, room charges) into a single invoice per visit.
 
@@ -426,31 +426,31 @@ The billing module aggregates charges from all departments (consultation fee, la
 
 - Insurance claims follow a separate TPA (Third Party Administrator) workflow
 
-| 💡  Hint:  Never trust payment confirmation from the client side. Always verify payment status by calling the Stripe or Razorpay webhook handler and comparing signatures. The test suite should include a simulated payment webhook test. |
-| --- |
+| 💡 Hint: Never trust payment confirmation from the client side. Always verify payment status by calling the Stripe or Razorpay webhook handler and comparing signatures. The test suite should include a simulated payment webhook test. |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-## 7.8  Notification System
+## 7.8 Notification System
 
 All notifications are generated as events inside the backend. A notification worker subscribes to the event bus and dispatches via the appropriate channel.
 
-| Trigger Event | Channels |
-| --- | --- |
-| Appointment confirmed | Email + SMS + In-app |
-| Appointment reminder (24h) | Email + SMS |
-| Lab report approved | Email + In-app push |
-| Prescription ready at pharmacy | SMS + In-app |
-| Invoice generated | Email + In-app |
-| Payment received | Email + SMS |
-| Low stock alert (staff only) | Email + In-app |
-| Emergency appointment created | In-app + SMS (doctor) |
+| Trigger Event                  | Channels              |
+| ------------------------------ | --------------------- |
+| Appointment confirmed          | Email + SMS + In-app  |
+| Appointment reminder (24h)     | Email + SMS           |
+| Lab report approved            | Email + In-app push   |
+| Prescription ready at pharmacy | SMS + In-app          |
+| Invoice generated              | Email + In-app        |
+| Payment received               | Email + SMS           |
+| Low stock alert (staff only)   | Email + In-app        |
+| Emergency appointment created  | In-app + SMS (doctor) |
 
-| 💡  Hint:  Use a fan-out pattern: one event → multiple notification handlers (EmailHandler, SMSHandler, PushHandler). Each handler runs in its own BullMQ queue so a failed SMS does not block the email from sending. |
-| --- |
+| 💡 Hint: Use a fan-out pattern: one event → multiple notification handlers (EmailHandler, SMSHandler, PushHandler). Each handler runs in its own BullMQ queue so a failed SMS does not block the email from sending. |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 <br>
 
-| 08  API Contract |
-| --- |
+| 08 API Contract |
+| --------------- |
 
 # REST API Design Guidelines
 
@@ -459,42 +459,42 @@ All APIs follow RESTful conventions with consistent response envelopes and error
 ## Standard Response Envelope
 
 | Success:<br>{ "success": true, "data": { ... }, "message": "OK" }<br>Error:<br>{ "success": false, "error": { "code": "SLOT_UNAVAILABLE", "message": "This slot was just booked by another patient." } }<br>Paginated List:<br>{ "success": true, "data": [...], "meta": { "page": 1, "limit": 20, "total": 348, "totalPages": 18 } } |
-| --- |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-| 💡  Hint:  Create a shared TypeScript types package (packages/types) that exports all API request/response interfaces. Import it in both the frontend and backend — this eliminates an entire class of integration bugs. |
-| --- |
+| 💡 Hint: Create a shared TypeScript types package (packages/types) that exports all API request/response interfaces. Import it in both the frontend and backend — this eliminates an entire class of integration bugs. |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Core API Endpoints Summary
 
-| Module | Method + Path | Auth Required |
-| --- | --- | --- |
-| Auth | POST /auth/login | Public |
-| Auth | POST /auth/refresh | Refresh token |
-| Users | GET /users/:id | Self or Admin |
-| Hospitals | GET /hospitals | Super Admin |
-| Departments | GET /hospitals/:id/departments | Hospital staff |
-| Doctors | GET /doctors?hospitalId=&specialisation= | Any authenticated |
-| Appointments | POST /appointments | Patient / Receptionist |
-| Appointments | PATCH /appointments/:id/status | Doctor / Receptionist |
-| EMR | POST /medical-records | Doctor |
-| EMR | GET /medical-records/:patientId | Doctor / Nurse / Patient (own) |
-| Prescriptions | POST /prescriptions | Doctor |
-| Prescriptions | GET /prescriptions/:id/pdf | Doctor / Patient (own) |
-| Lab Orders | POST /lab-orders | Doctor |
-| Lab Results | PATCH /lab-orders/:id/result | Lab Technician |
-| Medicines | GET /medicines?search=&hospitalId= | Pharmacist / Doctor |
-| Invoices | POST /invoices | Receptionist / Accountant |
-| Payments | POST /payments/webhook/stripe | Stripe (signature verified) |
-| Analytics | GET /analytics/revenue?from=&to= | Admin / Accountant |
-| Notifications | GET /notifications/me | Any authenticated |
+| Module        | Method + Path                            | Auth Required                  |
+| ------------- | ---------------------------------------- | ------------------------------ |
+| Auth          | POST /auth/login                         | Public                         |
+| Auth          | POST /auth/refresh                       | Refresh token                  |
+| Users         | GET /users/:id                           | Self or Admin                  |
+| Hospitals     | GET /hospitals                           | Super Admin                    |
+| Departments   | GET /hospitals/:id/departments           | Hospital staff                 |
+| Doctors       | GET /doctors?hospitalId=&specialisation= | Any authenticated              |
+| Appointments  | POST /appointments                       | Patient / Receptionist         |
+| Appointments  | PATCH /appointments/:id/status           | Doctor / Receptionist          |
+| EMR           | POST /medical-records                    | Doctor                         |
+| EMR           | GET /medical-records/:patientId          | Doctor / Nurse / Patient (own) |
+| Prescriptions | POST /prescriptions                      | Doctor                         |
+| Prescriptions | GET /prescriptions/:id/pdf               | Doctor / Patient (own)         |
+| Lab Orders    | POST /lab-orders                         | Doctor                         |
+| Lab Results   | PATCH /lab-orders/:id/result             | Lab Technician                 |
+| Medicines     | GET /medicines?search=&hospitalId=       | Pharmacist / Doctor            |
+| Invoices      | POST /invoices                           | Receptionist / Accountant      |
+| Payments      | POST /payments/webhook/stripe            | Stripe (signature verified)    |
+| Analytics     | GET /analytics/revenue?from=&to=         | Admin / Accountant             |
+| Notifications | GET /notifications/me                    | Any authenticated              |
 
-| 💡  Hint:  Document every API endpoint using Swagger (NestJS has built-in @nestjs/swagger support). Good API documentation is part of your deliverable and will be assessed by the examiner. |
-| --- |
+| 💡 Hint: Document every API endpoint using Swagger (NestJS has built-in @nestjs/swagger support). Good API documentation is part of your deliverable and will be assessed by the examiner. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 <br>
 
-| 09  Frontend Architecture |
-| --- |
+| 09 Frontend Architecture |
+| ------------------------ |
 
 # Frontend Design Principles
 
@@ -502,23 +502,23 @@ The frontend must feel like a professional clinical tool — clean, information-
 
 ## Folder Structure
 
-| Directory | Contents |
-| --- | --- |
-| app/(auth)/ | Login, register, forgot-password, MFA screens |
-| app/(dashboard)/ | Role-aware dashboard routes (doctor, patient, admin) |
-| app/(portal)/ | Patient self-service portal |
-| components/ui/ | Shadcn UI primitives (do not modify) |
-| components/shared/ | Reusable app-level components (DataTable, StatCard, etc.) |
-| components/modules/ | Feature-specific components (AppointmentCard, PrescriptionForm) |
-| hooks/ | Custom React hooks (useAuth, useRealtime, useDebounce) |
-| services/ | API client functions using TanStack Query (useAppointments, etc.) |
-| store/ | Zustand stores (authStore, notificationStore, sidebarStore) |
-| types/ | TypeScript interfaces and enums |
-| lib/ | Utility functions, date helpers, formatters |
-| constants/ | Route constants, API base URLs, role definitions |
+| Directory           | Contents                                                          |
+| ------------------- | ----------------------------------------------------------------- |
+| app/(auth)/         | Login, register, forgot-password, MFA screens                     |
+| app/(dashboard)/    | Role-aware dashboard routes (doctor, patient, admin)              |
+| app/(portal)/       | Patient self-service portal                                       |
+| components/ui/      | Shadcn UI primitives (do not modify)                              |
+| components/shared/  | Reusable app-level components (DataTable, StatCard, etc.)         |
+| components/modules/ | Feature-specific components (AppointmentCard, PrescriptionForm)   |
+| hooks/              | Custom React hooks (useAuth, useRealtime, useDebounce)            |
+| services/           | API client functions using TanStack Query (useAppointments, etc.) |
+| store/              | Zustand stores (authStore, notificationStore, sidebarStore)       |
+| types/              | TypeScript interfaces and enums                                   |
+| lib/                | Utility functions, date helpers, formatters                       |
+| constants/          | Route constants, API base URLs, role definitions                  |
 
-| 💡  Hint:  Keep your Zustand stores small and focused. A single massive store becomes hard to debug. One store per domain (auth, notifications, UI preferences) is the right granularity. |
-| --- |
+| 💡 Hint: Keep your Zustand stores small and focused. A single massive store becomes hard to debug. One store per domain (auth, notifications, UI preferences) is the right granularity. |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Dashboard UI Requirements
 
@@ -546,53 +546,53 @@ The frontend must feel like a professional clinical tool — clean, information-
 
 - Recent activity log
 
-| 💡  Hint:  Use Recharts for all charts — it integrates cleanly with Next.js without SSR issues. Wrap every chart in a client component with the 'use client' directive. |
-| --- |
+| 💡 Hint: Use Recharts for all charts — it integrates cleanly with Next.js without SSR issues. Wrap every chart in a client component with the 'use client' directive. |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 <br>
 
-| 10  Security Requirements |
-| --- |
+| 10 Security Requirements |
+| ------------------------ |
 
 # Security Implementation Checklist
 
 Medical data is among the most sensitive categories of personal information. These requirements are non-negotiable.
 
-| Security Control | Implementation Requirement |
-| --- | --- |
-| Password Hashing | bcrypt with minimum cost factor 12 |
-| Transport Security | HTTPS enforced everywhere; HTTP redirects to HTTPS at Nginx |
-| JWT Secrets | Minimum 256-bit random secret; stored in environment variable only |
-| Refresh Token Rotation | Issue new refresh token on every use; invalidate the old one |
-| Rate Limiting | 100 req/15 min per IP on auth endpoints; 1000 req/min on API |
-| CORS | Strict allow-list — only your frontend domain(s) |
-| Helmet.js | All recommended HTTP security headers enabled |
-| SQL Injection | Prisma parameterised queries prevent injection by default — never use raw() |
-| XSS | Sanitise all user-supplied HTML input using DOMPurify (frontend) |
-| CSRF | SameSite=Strict on cookies; CSRF token on state-changing requests |
-| Input Validation | Zod on frontend; class-validator + class-transformer on NestJS DTOs |
-| Audit Logging | Every create/update/delete operation logged with userId, IP, timestamp |
-| File Upload | Validate MIME type + file extension; scan with ClamAV or reject executables |
-| Data Encryption | Sensitive columns (diagnosis, notes) encrypted at rest using pgcrypto |
+| Security Control       | Implementation Requirement                                                  |
+| ---------------------- | --------------------------------------------------------------------------- |
+| Password Hashing       | bcrypt with minimum cost factor 12                                          |
+| Transport Security     | HTTPS enforced everywhere; HTTP redirects to HTTPS at Nginx                 |
+| JWT Secrets            | Minimum 256-bit random secret; stored in environment variable only          |
+| Refresh Token Rotation | Issue new refresh token on every use; invalidate the old one                |
+| Rate Limiting          | 100 req/15 min per IP on auth endpoints; 1000 req/min on API                |
+| CORS                   | Strict allow-list — only your frontend domain(s)                            |
+| Helmet.js              | All recommended HTTP security headers enabled                               |
+| SQL Injection          | Prisma parameterised queries prevent injection by default — never use raw() |
+| XSS                    | Sanitise all user-supplied HTML input using DOMPurify (frontend)            |
+| CSRF                   | SameSite=Strict on cookies; CSRF token on state-changing requests           |
+| Input Validation       | Zod on frontend; class-validator + class-transformer on NestJS DTOs         |
+| Audit Logging          | Every create/update/delete operation logged with userId, IP, timestamp      |
+| File Upload            | Validate MIME type + file extension; scan with ClamAV or reject executables |
+| Data Encryption        | Sensitive columns (diagnosis, notes) encrypted at rest using pgcrypto       |
 
-| 💡  Hint:  Set up Sentry from day one, not at the end. It will catch unhandled promise rejections in your background jobs that would otherwise be silent failures in production. |
-| --- |
+| 💡 Hint: Set up Sentry from day one, not at the end. It will catch unhandled promise rejections in your background jobs that would otherwise be silent failures in production. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 <br>
 
-| 11  Testing Strategy |
-| --- |
+| 11 Testing Strategy |
+| ------------------- |
 
 # Testing Requirements
 
 ## Testing Pyramid
 
-| Test Type | Scope & Tooling |
-| --- | --- |
-| Unit Tests (Jest) | Pure functions, service methods, Zod schemas, utility helpers — 80%+ coverage |
-| Integration Tests (Jest + Supertest) | API endpoints with a real test database — all happy and error paths |
-| Component Tests (Vitest + Testing Library) | React components in isolation — form validation, conditional rendering |
-| E2E Tests (Playwright) | Critical user journeys: registration, book appointment, pay invoice, download report |
+| Test Type                                  | Scope & Tooling                                                                      |
+| ------------------------------------------ | ------------------------------------------------------------------------------------ |
+| Unit Tests (Jest)                          | Pure functions, service methods, Zod schemas, utility helpers — 80%+ coverage        |
+| Integration Tests (Jest + Supertest)       | API endpoints with a real test database — all happy and error paths                  |
+| Component Tests (Vitest + Testing Library) | React components in isolation — form validation, conditional rendering               |
+| E2E Tests (Playwright)                     | Critical user journeys: registration, book appointment, pay invoice, download report |
 
 ## Mandatory Test Scenarios
 
@@ -608,23 +608,23 @@ Medical data is among the most sensitive categories of personal information. The
 
 - An invoice total matches the sum of all line items (billing integrity)
 
-| 💡  Hint:  Write the tenancy isolation tests on day one and run them in CI. If they ever fail, stop everything and fix it before merging. A multi-tenant data leak is a critical production incident, not a minor bug. |
-| --- |
+| 💡 Hint: Write the tenancy isolation tests on day one and run them in CI. If they ever fail, stop everything and fix it before merging. A multi-tenant data leak is a critical production incident, not a minor bug. |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 <br>
 
-| 12  Deployment Guide |
-| --- |
+| 12 Deployment Guide |
+| ------------------- |
 
 # Deployment Architecture
 
 ## Docker Compose (Development)
 
-| services:<br>  postgres:<br>    image: postgres:16-alpine<br>    environment: { POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD }<br>  redis:<br>    image: redis:7-alpine<br>  api:<br>    build: ./backend<br>    depends_on: [postgres, redis]<br>    env_file: .env<br>  frontend:<br>    build: ./frontend<br>    depends_on: [api]<br>  nginx:<br>    image: nginx:alpine<br>    ports: ['80:80', '443:443']<br>    volumes: ['./nginx.conf:/etc/nginx/nginx.conf'] |
-| --- |
+| services:<br> postgres:<br> image: postgres:16-alpine<br> environment: { POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD }<br> redis:<br> image: redis:7-alpine<br> api:<br> build: ./backend<br> depends_on: [postgres, redis]<br> env_file: .env<br> frontend:<br> build: ./frontend<br> depends_on: [api]<br> nginx:<br> image: nginx:alpine<br> ports: ['80:80', '443:443']<br> volumes: ['./nginx.conf:/etc/nginx/nginx.conf'] |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-| 💡  Hint:  Never commit your .env file to Git. Use .env.example with placeholder values and document every variable. Add .env to .gitignore from the very first commit. |
-| --- |
+| 💡 Hint: Never commit your .env file to Git. Use .env.example with placeholder values and document every variable. Add .env to .gitignore from the very first commit. |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## CI/CD Pipeline (GitHub Actions)
 
@@ -634,68 +634,68 @@ Medical data is among the most sensitive categories of personal information. The
 
 - On release tag: deploy to production (blue-green deployment with health check gate)
 
-| 💡  Hint:  Protect your main branch with branch protection rules: require passing CI before merging and no direct pushes to main. Treat your repository the way a professional engineering team would — good Git hygiene is part of the assessment. |
-| --- |
+| 💡 Hint: Protect your main branch with branch protection rules: require passing CI before merging and no direct pushes to main. Treat your repository the way a professional engineering team would — good Git hygiene is part of the assessment. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 <br>
 
-| 13  Project Deliverables |
-| --- |
+| 13 Project Deliverables |
+| ----------------------- |
 
 # What You Must Submit
 
-| Deliverable | Description |
-| --- | --- |
-| GitHub Repository | Your personal repo — clean commit history with daily commits, meaningful messages |
-| README.md | Setup instructions, architecture overview, API base URL, demo credentials |
-| Architecture Diagram | System components and data flow (Excalidraw / draw.io export) |
-| ER Diagram | Full database entity-relationship diagram (generated from Prisma) |
-| API Documentation | Swagger UI running at /api/docs on the deployed backend |
-| Live Demo URL | Deployed frontend (Vercel) + backend (AWS EC2) with seeded demo data |
-| Demo Credentials | One login per role — provided in README or submitted separately |
-| Project Report | Technical decisions, challenges faced, lessons learned (6–10 pages) |
-| Test Coverage Report | Jest coverage HTML report showing >70% coverage |
-| Video Walkthrough | 5–8 minute screen recording covering all major user flows |
+| Deliverable          | Description                                                                       |
+| -------------------- | --------------------------------------------------------------------------------- |
+| GitHub Repository    | Your personal repo — clean commit history with daily commits, meaningful messages |
+| README.md            | Setup instructions, architecture overview, API base URL, demo credentials         |
+| Architecture Diagram | System components and data flow (Excalidraw / draw.io export)                     |
+| ER Diagram           | Full database entity-relationship diagram (generated from Prisma)                 |
+| API Documentation    | Swagger UI running at /api/docs on the deployed backend                           |
+| Live Demo URL        | Deployed frontend (Vercel) + backend (AWS EC2) with seeded demo data              |
+| Demo Credentials     | One login per role — provided in README or submitted separately                   |
+| Project Report       | Technical decisions, challenges faced, lessons learned (6–10 pages)               |
+| Test Coverage Report | Jest coverage HTML report showing >70% coverage                                   |
+| Video Walkthrough    | 5–8 minute screen recording covering all major user flows                         |
 
-| 💡  Hint:  Seed your database with realistic-looking but entirely invented data. Create at least 2 hospitals, 8 doctors across different specialisations, 30 patients, and an appointment history covering 2 weeks. Anyone reviewing the demo will explore it — empty dashboards leave a poor impression. |
-| --- |
+| 💡 Hint: Seed your database with realistic-looking but entirely invented data. Create at least 2 hospitals, 8 doctors across different specialisations, 30 patients, and an appointment history covering 2 weeks. Anyone reviewing the demo will explore it — empty dashboards leave a poor impression. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 <br>
 
-| 14  Evaluation Criteria |
-| --- |
+| 14 Evaluation Criteria |
+| ---------------------- |
 
 # Assessment Rubric
 
-| Area | Weight | What We Look For |
-| --- | --- | --- |
-| System Architecture | 15% | Multi-tenancy, clean separation of concerns, logical module boundaries |
-| Database Design | 15% | Normalisation, correct relationships, indexes, migrations |
-| Backend API Quality | 20% | REST conventions, error handling, validation, auth & RBAC |
-| Frontend UX | 15% | Responsiveness, loading states, error states, accessibility |
-| Security | 10% | All checklist items implemented, no secrets in code, input validation |
-| Testing | 10% | Coverage breadth, critical paths covered, CI integration |
-| Deployment | 10% | Live demo running, Docker Compose works, CI/CD pipeline set up |
-| Documentation | 5% | README, API docs, ER diagram, architecture diagram |
+| Area                | Weight | What We Look For                                                       |
+| ------------------- | ------ | ---------------------------------------------------------------------- |
+| System Architecture | 15%    | Multi-tenancy, clean separation of concerns, logical module boundaries |
+| Database Design     | 15%    | Normalisation, correct relationships, indexes, migrations              |
+| Backend API Quality | 20%    | REST conventions, error handling, validation, auth & RBAC              |
+| Frontend UX         | 15%    | Responsiveness, loading states, error states, accessibility            |
+| Security            | 10%    | All checklist items implemented, no secrets in code, input validation  |
+| Testing             | 10%    | Coverage breadth, critical paths covered, CI integration               |
+| Deployment          | 10%    | Live demo running, Docker Compose works, CI/CD pipeline set up         |
+| Documentation       | 5%     | README, API docs, ER diagram, architecture diagram                     |
 
 <br>
 
-| 15  Tools & Resources |
-| --- |
+| 15 Tools & Resources |
+| -------------------- |
 
 # Required Tools
 
 ## Development Environment
 
-| Tool | Purpose & Download |
-| --- | --- |
-| Node.js 20 LTS | Runtime — nodejs.org |
-| pnpm 9 | Package manager — pnpm.io (faster than npm, supports workspaces) |
-| PostgreSQL 16 | Database server — postgresql.org or run via Docker |
-| Redis 7 | Cache & sessions — redis.io or run via Docker |
-| Docker Desktop | Containerisation — docker.com/products/docker-desktop |
-| Git 2.40+ | Version control — git-scm.com |
-| VS Code | Recommended IDE — code.visualstudio.com |
+| Tool           | Purpose & Download                                               |
+| -------------- | ---------------------------------------------------------------- |
+| Node.js 20 LTS | Runtime — nodejs.org                                             |
+| pnpm 9         | Package manager — pnpm.io (faster than npm, supports workspaces) |
+| PostgreSQL 16  | Database server — postgresql.org or run via Docker               |
+| Redis 7        | Cache & sessions — redis.io or run via Docker                    |
+| Docker Desktop | Containerisation — docker.com/products/docker-desktop            |
+| Git 2.40+      | Version control — git-scm.com                                    |
+| VS Code        | Recommended IDE — code.visualstudio.com                          |
 
 ## VS Code Extensions (Install These)
 
@@ -715,59 +715,59 @@ Medical data is among the most sensitive categories of personal information. The
 
 - Error Lens — inline error highlighting
 
-| 💡  Hint:  Configure VS Code to format on save using Prettier and lint on save using ESLint. Add these settings to .vscode/settings.json and commit the file — this keeps your codebase consistent across machines and will matter if someone else reviews your code. |
-| --- |
+| 💡 Hint: Configure VS Code to format on save using Prettier and lint on save using ESLint. Add these settings to .vscode/settings.json and commit the file — this keeps your codebase consistent across machines and will matter if someone else reviews your code. |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Cloud & Third-Party Services
 
-| Service | Purpose & Free Tier |
-| --- | --- |
-| AWS Free Tier | EC2 t2.micro (compute), RDS t3.micro (PostgreSQL), S3 (storage) |
-| Vercel | Frontend hosting — free for hobby/student projects |
-| Neon.tech or Supabase | Managed PostgreSQL alternative if skipping AWS RDS |
-| Upstash Redis | Managed Redis — free tier available, no card required |
-| Stripe Test Mode | Payment processing — stripe.com (use test keys, no real money) |
-| Razorpay Test Mode | Indian payment gateway — razorpay.com (test mode available) |
-| Twilio Trial | SMS notifications — twilio.com (free trial credit) |
-| Resend | Email delivery — resend.com (free tier: 3,000 emails/month) |
-| Cloudinary | Media storage — cloudinary.com (free: 25 GB) |
-| Sentry | Error monitoring — sentry.io (free: 5,000 errors/month) |
+| Service               | Purpose & Free Tier                                             |
+| --------------------- | --------------------------------------------------------------- |
+| AWS Free Tier         | EC2 t2.micro (compute), RDS t3.micro (PostgreSQL), S3 (storage) |
+| Vercel                | Frontend hosting — free for hobby/student projects              |
+| Neon.tech or Supabase | Managed PostgreSQL alternative if skipping AWS RDS              |
+| Upstash Redis         | Managed Redis — free tier available, no card required           |
+| Stripe Test Mode      | Payment processing — stripe.com (use test keys, no real money)  |
+| Razorpay Test Mode    | Indian payment gateway — razorpay.com (test mode available)     |
+| Twilio Trial          | SMS notifications — twilio.com (free trial credit)              |
+| Resend                | Email delivery — resend.com (free tier: 3,000 emails/month)     |
+| Cloudinary            | Media storage — cloudinary.com (free: 25 GB)                    |
+| Sentry                | Error monitoring — sentry.io (free: 5,000 errors/month)         |
 
-| 💡  Hint:  Use Stripe's test card number 4242 4242 4242 4242 (any future date, any 3-digit CVC) for all payment testing. Never use real card details in a development environment. |
-| --- |
+| 💡 Hint: Use Stripe's test card number 4242 4242 4242 4242 (any future date, any 3-digit CVC) for all payment testing. Never use real card details in a development environment. |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ## Design & Diagramming Tools
 
-| Tool | Use |
-| --- | --- |
-| Excalidraw (excalidraw.com) | Architecture diagrams — free, no account needed, export as PNG/SVG |
-| dbdiagram.io | ER diagrams from DBML syntax — easy to version control |
-| Figma (figma.com) | UI mockups — free for students with up to 3 projects |
-| Prisma Studio | Visual database browser — built into Prisma, run with npx prisma studio |
-| TablePlus or DBeaver | GUI database client for PostgreSQL |
-| Postman | API testing and documentation — postman.com |
-| Insomnia | Lightweight API client alternative to Postman |
+| Tool                        | Use                                                                     |
+| --------------------------- | ----------------------------------------------------------------------- |
+| Excalidraw (excalidraw.com) | Architecture diagrams — free, no account needed, export as PNG/SVG      |
+| dbdiagram.io                | ER diagrams from DBML syntax — easy to version control                  |
+| Figma (figma.com)           | UI mockups — free for students with up to 3 projects                    |
+| Prisma Studio               | Visual database browser — built into Prisma, run with npx prisma studio |
+| TablePlus or DBeaver        | GUI database client for PostgreSQL                                      |
+| Postman                     | API testing and documentation — postman.com                             |
+| Insomnia                    | Lightweight API client alternative to Postman                           |
 
 ## Learning Resources
 
-| Resource | Topic |
-| --- | --- |
-| docs.nestjs.com | Official NestJS documentation — read the Guards and Interceptors sections first |
-| nextjs.org/docs | Next.js App Router docs — focus on Server Components and Route Handlers |
-| prisma.io/docs | Prisma schema language, migrations, and query API |
-| tanstack.com/query | TanStack Query — read the 'Important Defaults' section carefully |
-| socket.io/docs | Socket.IO docs — rooms, namespaces, and authentication |
-| stripe.com/docs/webhooks | Stripe webhook verification — critical reading before implementing payments |
-| owasp.org/Top10 | OWASP Top 10 — security vulnerabilities every developer must know |
-| use-the-platform.dev | Web platform fundamentals that Next.js is built on |
+| Resource                 | Topic                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| docs.nestjs.com          | Official NestJS documentation — read the Guards and Interceptors sections first |
+| nextjs.org/docs          | Next.js App Router docs — focus on Server Components and Route Handlers         |
+| prisma.io/docs           | Prisma schema language, migrations, and query API                               |
+| tanstack.com/query       | TanStack Query — read the 'Important Defaults' section carefully                |
+| socket.io/docs           | Socket.IO docs — rooms, namespaces, and authentication                          |
+| stripe.com/docs/webhooks | Stripe webhook verification — critical reading before implementing payments     |
+| owasp.org/Top10          | OWASP Top 10 — security vulnerabilities every developer must know               |
+| use-the-platform.dev     | Web platform fundamentals that Next.js is built on                              |
 
 <br>
 
 | A Note from the Project Coordinator<br>This project is intentionally ambitious for a solo 4-week build. You are not expected to ship every module to perfection. You are expected to make considered engineering decisions, justify them in your report, and produce working software that demonstrates your understanding of the full stack.<br>Prioritise depth over breadth. A fully working Auth + Appointments + EMR + Billing flow — with proper validation, error handling, and tests — is far more impressive than ten half-built modules. Build the core journey end-to-end first, then layer on additional features if time allows.<br>Four weeks will go faster than you think. Commit code every single day. Deploy early — even a broken deployment on Day 3 is better than a deployment crisis on the final day. The ability to ship consistently under time pressure is exactly what this project is designed to test. |
-| --- |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
-MedCore HMS  •  Product Requirements Document  •  v1.0
+MedCore HMS • Product Requirements Document • v1.0
 
-Solo Developer Project  •  Full Stack Development
+Solo Developer Project • Full Stack Development
 
-	MedCore HMS  —  Solo Developer Project	Page
+    MedCore HMS  —  Solo Developer Project	Page
