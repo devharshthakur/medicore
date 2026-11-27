@@ -3,17 +3,11 @@
   "version": "9",
   "dialect": "postgres",
   "id": "d3c6e20d-728d-40f9-b264-4fee86848ba0",
-  "prevIds": [
-    "00000000-0000-0000-0000-000000000000"
-  ],
+  "prevIds": ["00000000-0000-0000-0000-000000000000"],
   "footprints": [
     {
       "statementType": "create_table",
-      "statementTarget": [
-        "table",
-        "public",
-        "sessions"
-      ],
+      "statementTarget": ["table", "public", "sessions"],
       "writes": [
         "s|tbl|public.sessions",
         "n|tbl|public.sessions",
@@ -23,17 +17,11 @@
         "n|rel|public.sessions_pkey",
         "n|rel|public.sessions_token_hash_key"
       ],
-      "reads": [
-        "n|sch|public"
-      ]
+      "reads": ["n|sch|public"]
     },
     {
       "statementType": "create_table",
-      "statementTarget": [
-        "table",
-        "public",
-        "users"
-      ],
+      "statementTarget": ["table", "public", "users"],
       "writes": [
         "s|tbl|public.users",
         "n|tbl|public.users",
@@ -43,57 +31,33 @@
         "n|rel|public.users_pkey",
         "n|rel|public.users_email_key"
       ],
-      "reads": [
-        "n|sch|public"
-      ]
+      "reads": ["n|sch|public"]
     },
     {
       "statementType": "create_index",
-      "statementTarget": [
-        "index",
-        "public",
-        "sessions",
-        "sessions_user_id_idx"
-      ],
+      "statementTarget": ["index", "public", "sessions", "sessions_user_id_idx"],
       "writes": [
         "s|idx|public.sessions_user_id_idx",
         "n|idx|public.sessions_user_id_idx",
         "e|idx|public.sessions_user_id_idx",
         "n|rel|public.sessions_user_id_idx"
       ],
-      "reads": [
-        "n|tbl|public.sessions",
-        "n|sch|public",
-        "n|col|public.sessions.user_id"
-      ]
+      "reads": ["n|tbl|public.sessions", "n|sch|public", "n|col|public.sessions.user_id"]
     },
     {
       "statementType": "create_index",
-      "statementTarget": [
-        "index",
-        "public",
-        "sessions",
-        "sessions_expires_at_idx"
-      ],
+      "statementTarget": ["index", "public", "sessions", "sessions_expires_at_idx"],
       "writes": [
         "s|idx|public.sessions_expires_at_idx",
         "n|idx|public.sessions_expires_at_idx",
         "e|idx|public.sessions_expires_at_idx",
         "n|rel|public.sessions_expires_at_idx"
       ],
-      "reads": [
-        "n|tbl|public.sessions",
-        "n|sch|public",
-        "n|col|public.sessions.expires_at"
-      ]
+      "reads": ["n|tbl|public.sessions", "n|sch|public", "n|col|public.sessions.expires_at"]
     },
     {
       "statementType": "create_fk",
-      "statementTarget": [
-        "table",
-        "public",
-        "sessions"
-      ],
+      "statementTarget": ["table", "public", "sessions"],
       "writes": [
         "s|fk|public.sessions.sessions_user_id_users_id_fkey",
         "n|fk|public.sessions.sessions_user_id_users_id_fkey",
@@ -314,14 +278,10 @@
       "table": "sessions",
       "name": "sessions_user_id_users_id_fkey",
       "nameExplicit": false,
-      "columns": [
-        "user_id"
-      ],
+      "columns": ["user_id"],
       "schemaTo": "public",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "entityType": "fks"
@@ -330,9 +290,7 @@
       "schema": "public",
       "table": "sessions",
       "name": "sessions_pkey",
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "entityType": "pks"
     },
@@ -340,9 +298,7 @@
       "schema": "public",
       "table": "users",
       "name": "users_pkey",
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "entityType": "pks"
     },
@@ -351,9 +307,7 @@
       "table": "sessions",
       "name": "sessions_token_hash_key",
       "nameExplicit": false,
-      "columns": [
-        "token_hash"
-      ],
+      "columns": ["token_hash"],
       "nullsNotDistinct": false,
       "entityType": "uniques"
     },
@@ -362,9 +316,7 @@
       "table": "users",
       "name": "users_email_key",
       "nameExplicit": false,
-      "columns": [
-        "email"
-      ],
+      "columns": ["email"],
       "nullsNotDistinct": false,
       "entityType": "uniques"
     }
